@@ -2,6 +2,8 @@
 
 **This project will be run in the DAP environment.**
 
+## Getting Started
+
 ### Setup your local development environment
 **Note: This section only needs completing once**
 1.  Set your default browser to Google Chrome - [instructions][Make Chrome your default browser].
