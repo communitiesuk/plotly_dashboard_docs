@@ -1,6 +1,6 @@
 # plotly_dashboard_docs
 
-**This project will be run in the DAP environment.**
+**This instructions are designed to be run in the DAP environment.**
 
 ## Getting Started
 
