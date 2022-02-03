@@ -1,4 +1,4 @@
-# plotly_dashboard_docs
+# Plotly dashboard docs
 
 **This instructions are designed to be run in the DAP environment.**
 
@@ -149,4 +149,7 @@ Refresh the environment by running this command:
 conda env update -f environment.workspace.yml
 ```
 
-If this doesn't resolve the problem, deactivate and remove the `Dashboard name` Conda environment before running the environment setup steps in [Installing packages](###Installing packages) again.
+If this doesn't resolve the problem, you can try destroying and recreating your environment.
+1. Deactivate your conda environment with `conda deactivate`
+1. Remove the existing environment with `conda env remove --name <Dashboard name>`
+1. Run the environment setup steps in [Installing packages](#installing-packages) again.
