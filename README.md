@@ -36,8 +36,8 @@ git config --global user.email "Your.Name@levellingup.gov.uk"
 ### Installing packages
 
 1.  [Open a command prompt terminal within VS Code][open-terminal], in which you'll start executing some commands. By default, the initial terminal will be a powershell terminal, and you will need to [switch to a command prompt shell][terminal-switch]. 
-1.  Update the name field in environment.workspace.yml to the dashboard name
-1.  Create a new conda environment by typing `conda env create -f environment.workspace.yml` into the terminal and executing the command by pressing the Enter key.
+1.  Update the name field in environment.yml to the dashboard name
+1.  Create a new conda environment by typing `conda env create -f environment.yml` into the terminal and executing the command by pressing the Enter key.
 1.  Activate your conda environment with `conda activate <dashboard name> `
 1. Close VS Code. Open Anaconda Navigator, select "&lt; Dashboard name &gt;" for the 'Application on' drop down menu, then select "Launch" VS Code. Click the bin icon on the terminal toolbar to close the terminal. Click the plus icon on the terminal toolbar to launch a new terminal.
 1.  Install the [Microsoft Python][python_extension] extension for VS Code.
@@ -146,7 +146,7 @@ With the code in Q:\AnalyticalDashboards\<your dashboard name>
 Refresh the environment by running this command:
 
 ```bash
-conda env update -f environment.workspace.yml
+conda env update -f environment.yml
 ```
 
 If this doesn't resolve the problem, you can try destroying and recreating your environment.
