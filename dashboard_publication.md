@@ -9,6 +9,15 @@
 
 ##s3 buckets 
 
+###Key terms
+SERVICE_NAME = Unique identifier for the bucket
+
+APP_NAME = The application set up within GovUK PaaS
+
+SERVICE_KEY = Unique identifier for external access credentials
+
+---
+
 ###Creating a bucket 
 
 The following are steps to take inorder to create a s3 bucket backing service within GovUK PaaS
@@ -43,12 +52,8 @@ cf service-key SERVICE_NAME SERVICE_KEY
 
 ---
 
-###Key terms
-SERVICE_NAME = Unique identifier for the bucket
-
-APP_NAME = The application set up within GovUK PaaS
-
-SERVICE_KEY = Unique identifier for external access credentials
+###links
+https://docs.cloud.service.gov.uk/deploying_services/s3/#bind-an-aws-s3-bucket-to-your-app
 
 ##Useful Cloud Foundry commands
 
@@ -63,8 +68,3 @@ get service key credentials
 ```bash
 cf service-key SERVICE_NAME SERVICE_KEY
 ```
-
----
-
-###links
-https://docs.cloud.service.gov.uk/deploying_services/s3/#bind-an-aws-s3-bucket-to-your-app
