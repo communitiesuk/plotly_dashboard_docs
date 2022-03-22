@@ -61,7 +61,7 @@ cf service-key SERVICE_NAME SERVICE_KEY
 #### Connecting to s3
 In order to connect to s3, you will need an AWS access key and an AWS secret access key.
 
-#####To get credentials for the APP to the backing service use:
+##### To get credentials for the APP to the backing service use:
 ```bash
 cf env APP_NAME
 ```
@@ -99,7 +99,7 @@ VCAP_SERVICES: {
 
 ---
 
-#####To get credentials for a service key use:
+##### To get credentials for a service key use:
 ```bash
 cf service-key SERVICE-NAME SERVICE-KEY
 ```
