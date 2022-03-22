@@ -9,7 +9,7 @@
       3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
       4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
    3. [Key terms](#key-terms)
-   4. [links](#links)
+   4. [References](#References)
 2. [Useful Cloud Foundry commands](#useful-cloud-foundry-commands)
 
 ## s3 buckets 
@@ -74,7 +74,7 @@ The output will look like:
 }
 ```
 
-Within python we need to use the boto3 package to connect to the s3 backing service.
+Within python, we need to use the boto3 package to connect to the s3 backing service.
 
 We use boto3 to create a resource object, which represent an object-oriented interface to Amazon Web Services (AWS).
 
@@ -118,8 +118,10 @@ df = pd.read_csv(response_content)
 
 ---
 
-### links
+### References
 https://docs.cloud.service.gov.uk/deploying_services/s3/#bind-an-aws-s3-bucket-to-your-app
+
+https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html
 
 ## Useful Cloud Foundry commands
 
