@@ -100,11 +100,26 @@ echo "Remember to run Black and Pylint before pushing to GitHub"
 
 ### Retrieving data from CDS
 
-1. From within the DAP AWS Workspace, open "Microsoft SQL Server Management Studio 18".
-1. Enable [Export headers option][export-headers] and then restart the SQL Server Management Studio.
+1. Check data available. From within the DAP AWS Workspace, open "Microsoft SQL Server Management Studio 18".
 1. Enter the Server name as "DAP-SQLTEST\CDS", and under Options specify the Database name as "Dashboards".
-1. Open the "New Query" from the Toolbar, paste in the query that corresponds to your table and execute.
-1. Right click on the results set and select "Save Results as" to an appropriate place in the `data/` directory.
+1. Open the "New Query" from the Toolbar, paste in the query that corresponds to your table or view and execute.
+1. In the data folder of your dashboard create new file. Import pandas and pyodbc.
+1. Enter code:
+``` 
+    conn = pyodbc.connect(
+    "Driver={SQL Server};"
+    "Server=DAP-SQLTEST\CDS;"
+    "Database=Dashboards;"
+    "Trusted_Connection=yes;"
+)
+sql_query = pd.read_sql_query(
+    """ 
+    [ENTER SQL QUERY HERE]
+    """,
+    conn,
+)
+```
+1. Save as dataframe. Convert to csv. 
 
 SQL cheat sheet available [here](https://learnsql.com/blog/sql-basics-cheat-sheet/)
 
