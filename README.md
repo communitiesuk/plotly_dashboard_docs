@@ -50,7 +50,8 @@ git config --global user.email "Your.Name@levellingup.gov.uk"
 [python_extension]: https://marketplace.visualstudio.com/items?itemName=ms-python.python
 [configure_python_interpreter]: https://code.visualstudio.com/docs/python/python-tutorial#_select-a-python-interpreter
 
-### Running the application
+### Running the application 
+
 
 1.  From your VS Code terminal, execute `python run.py`
 1.  Wait for the message "Dash is running on ..." message to appear
