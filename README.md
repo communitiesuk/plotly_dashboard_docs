@@ -52,7 +52,6 @@ git config --global user.email "Your.Name@levellingup.gov.uk"
 
 ### Running the application 
 
-
 1.  From your VS Code terminal, execute `python run.py`
 1.  Wait for the message "Dash is running on ..." message to appear
 1.  Navigate to http://localhost:8080/ in your browser within the AWS workspace. Note that http://localhost:8080/ is the address that dash will run on in your local machine.
