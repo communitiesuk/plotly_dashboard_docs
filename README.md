@@ -50,7 +50,7 @@ git config --global user.email "Your.Name@levellingup.gov.uk"
 [python_extension]: https://marketplace.visualstudio.com/items?itemName=ms-python.python
 [configure_python_interpreter]: https://code.visualstudio.com/docs/python/python-tutorial#_select-a-python-interpreter
 
-### Running the application 
+### Running the application
 
 1.  From your VS Code terminal, execute `python run.py`
 1.  Wait for the message "Dash is running on ..." message to appear
@@ -106,7 +106,7 @@ echo "Remember to run Black and Pylint before pushing to GitHub"
 1. In the data folder of your dashboard create new file. Import pandas and pyodbc.
 1. Enter code:
 ``` 
-    conn = pyodbc.connect(
+conn = pyodbc.connect(
     "Driver={SQL Server};"
     "Server=DAP-SQLTEST\CDS;"
     "Database=Dashboards;"
