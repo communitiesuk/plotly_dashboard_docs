@@ -168,7 +168,8 @@ df = pd.read_csv(response_content)
 
 ## Setting up GitHub manual reviewers for deployment
 1. From the GitHub repository click ```Settings```, then ```New environment```, provide a name for the environment and click ```Configure environment```.
-2. Tick ```Required reviewers``` and enter usernames/teamnames, then click ```Save protection rules```.
+![](images/github-envrionments.png)
+2. Tick ```Required reviewers``` and enter usernames/team-name, then click ```Save protection rules```.
 3. Reference the new environment within the GitHub Actions workflow file at the job level e.g.:
 ```
 jobs:
@@ -181,6 +182,7 @@ jobs:
 ```
 4. From the GitHub repository click ```Settings```, then ```Environments```, click on the environemnt to configure and click ```Add secret```.
 5. Secrets can be used within GitHub Actions using: ```${{secrets.<secret_name>}}```
+   1. Secrets at the environment level will take precedence over repository level secrets. 
 
 ---
 
