@@ -2,15 +2,16 @@
 
 ## Table of contents
 1. [Buckets](#s3-buckets)
-   1. [Creating a bucket](#creating-a-bucket)
-   2. [Using a private bucket](#using-a-private-bucket)
+   1. [Key terms](#key-terms)
+   2. [Creating a bucket](#creating-a-bucket)
+   3. [Using a private bucket](#using-a-private-bucket)
       1. [Connecting to s3](#connecting-to-s3)
       2. [Accessing a bucket](#accessing-a-bucket)
       3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
       4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
-   3. [Key terms](#key-terms)
-   4. [References](#references)
-2. [Useful Cloud Foundry commands](#useful-cloud-foundry-commands)
+2. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
+3. [References](#references)
+4. [Useful Cloud Foundry commands](#useful-cloud-foundry-commands)
 
 ## s3 buckets 
 
@@ -186,7 +187,7 @@ jobs:
 
 ---
 
-### References
+## References
 https://docs.cloud.service.gov.uk/deploying_services/s3/#bind-an-aws-s3-bucket-to-your-app
 
 https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html
