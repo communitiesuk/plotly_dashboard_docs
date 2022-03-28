@@ -166,10 +166,30 @@ df = pd.read_csv(response_content)
 
 ---
 
+## Setting up GitHub manual reviewers for deployment
+1. From the GitHub repository click ```Settings```, then ```New environment```, provide a name for the environment and click ```Configure environment```.
+2. Tick ```Required reviewers``` and enter usernames/teamnames, then click ```Save protection rules```.
+3. Reference the new environment within the GitHub Actions workflow file at the job level e.g.:
+```
+jobs:
+  deploy-production:
+    name: 'Deploy to production Gov PaaS'
+    runs-on: ubuntu-20.04
+    environment: '<environment_name>'
+    concurrency: production_environment
+    needs: [deploy-staging]
+```
+4. From the GitHub repository click ```Settings```, then ```Environments```, click on the environemnt to configure and click ```Add secret```.
+5. Secrets can be used within GitHub Actions using: ```${{secrets.<secret_name>}}```
+
+---
+
 ### References
 https://docs.cloud.service.gov.uk/deploying_services/s3/#bind-an-aws-s3-bucket-to-your-app
 
 https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html
+
+https://cloudlumberjack.com/posts/github-actions-approvals/ 
 
 ---
 
