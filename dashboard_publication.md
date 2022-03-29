@@ -4,14 +4,13 @@
 1. [Creating a S3 bucket](#creating-a-s3-bucket)
    1. [Key terms](#key-terms)
    2. [Creating a bucket](#creating-a-bucket)
-   3. [Accessing a private S3 bucket](#using-a-private-bucket)
-      1. [Connecting to s3](#connecting-to-s3)
-      2. [Accessing a bucket](#accessing-a-bucket)
-      3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
-      4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
-2. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
-3. [References](#references)
-4. [Useful Cloud Foundry commands](#useful-cloud-foundry-commands)
+2. [Accessing a private S3 bucket](#using-a-private-bucket)
+   1. [Connecting to s3](#connecting-to-s3)
+   2. [Connecting to a bucket](#connecting-to-a-bucket)
+   3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
+   4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
+3. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
+4. [References](#references)
 
 ## Creating an AWS S3 backing service
 
@@ -61,8 +60,8 @@ cf service-key SERVICE_NAME SERVICE_KEY
 
 ### Connecting to S3
 In order to connect to S3, you will need an AWS access key and an AWS secret access key.
-
-#### To get credentials for the APP to the backing service use:
+ 
+To get credentials for the APP to the backing service use:
 ```bash
 cf env APP_NAME
 ```
@@ -134,7 +133,7 @@ s3_client=boto3.resource(
 
 ---
 
-### Accessing a bucket
+### Connecting to a bucket
 
 Using the resource object, we can connect to a given bucket using the following:
 
@@ -196,31 +195,3 @@ https://cloudlumberjack.com/posts/github-actions-approvals/
 
 ---
 
-## Useful Cloud Foundry commands
-
-Get environment variables:
-```bash
-cf env APP_NAME
-```
-
----
-
-Get all service keys for a service
-
-```bash
-cf service-keys SERVICE_NAME
-```
-
----
-
-Get service key credentials
-```bash
-cf service-key SERVICE_NAME SERVICE_KEY
-```
-
----
-
-Get most recent logs. Useful when a deployment fails.
-```bash
-cf logs APP_NAME --recent
-```
