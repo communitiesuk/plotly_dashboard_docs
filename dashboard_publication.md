@@ -184,6 +184,41 @@ jobs:
 5. Secrets can be used within GitHub Actions using: ```${{secrets.<secret_name>}}```
    1. Secrets at the environment level will take precedence over repository level secrets. 
 
+### Setting up manual reviewers from different groups
+
+If your application requires approval from two groups e.g. Approval from a product manager and an approval from the development team,
+follow these instructions:
+
+1. Create separate environments for each of the groups you require approval from. See [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment).
+2. Add the required reviewers as appropriate. e.g. Developers in the developer environment and product managers in product manager environment.
+3. Within the GitHub action, create a job for each of the environments e.g.:
+```yml
+jobs:
+   tech_approval:
+    name: 'Tech approval'
+    environment: 'prod-tech'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: 'Tech approved'
+        run: echo 'Technical approved'
+   
+   product_approval:
+    name: 'Product manager approval'
+    environment: 'prod-product'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: 'Product manager approved'
+        run: echo 'Product manager approved'
+```
+4. For the job that you require manual approval on, add the ```needs: [tech_approval, product_approval]``` to that job. e.g.:
+```
+jobs:
+  deploy-production:
+    name: 'Deploy to production Gov PaaS'
+    runs-on: ubuntu-20.04
+    needs: [product_approval, tech_approval]
+```
+
 ---
 
 ## References
@@ -192,6 +227,3 @@ https://docs.cloud.service.gov.uk/deploying_services/s3/#bind-an-aws-s3-bucket-t
 https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html
 
 https://cloudlumberjack.com/posts/github-actions-approvals/ 
-
----
-
