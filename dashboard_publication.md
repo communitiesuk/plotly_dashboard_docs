@@ -211,7 +211,7 @@ jobs:
         run: echo 'Product manager approved'
 ```
 4. For the job that you require manual approval on, add the ```needs: [tech_approval, product_approval]``` to that job. e.g.:
-```
+```yml
 jobs:
   deploy-production:
     name: 'Deploy to production Gov PaaS'
