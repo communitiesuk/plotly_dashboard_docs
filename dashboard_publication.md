@@ -1,10 +1,10 @@
 # Publication of a DLUHC owned dashboard.
 
 ## Table of contents
-1. [Buckets](#s3-buckets)
+1. [Creating a S3 bucket](#creating-a-s3-bucket)
    1. [Key terms](#key-terms)
    2. [Creating a bucket](#creating-a-bucket)
-   3. [Using a private bucket](#using-a-private-bucket)
+   3. [Accessing a private S3 bucket](#using-a-private-bucket)
       1. [Connecting to s3](#connecting-to-s3)
       2. [Accessing a bucket](#accessing-a-bucket)
       3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
@@ -13,7 +13,7 @@
 3. [References](#references)
 4. [Useful Cloud Foundry commands](#useful-cloud-foundry-commands)
 
-## s3 buckets 
+## Creating an AWS S3 backing service
 
 ### Key terms
 SERVICE_NAME = Unique identifier for the bucket
@@ -57,12 +57,12 @@ cf service-key SERVICE_NAME SERVICE_KEY
 ```
 
 ---
-### Using a private bucket
+## Accessing a private S3 bucket in Python
 
-#### Connecting to s3
-In order to connect to s3, you will need an AWS access key and an AWS secret access key.
+### Connecting to S3
+In order to connect to S3, you will need an AWS access key and an AWS secret access key.
 
-##### To get credentials for the APP to the backing service use:
+#### To get credentials for the APP to the backing service use:
 ```bash
 cf env APP_NAME
 ```
@@ -100,7 +100,7 @@ VCAP_SERVICES: {
 
 ---
 
-##### To get credentials for a service key use:
+#### To get credentials for a service key use:
 ```bash
 cf service-key SERVICE-NAME SERVICE-KEY
 ```
@@ -134,7 +134,7 @@ s3_client=boto3.resource(
 
 ---
 
-#### Accessing a bucket
+### Accessing a bucket
 
 Using the resource object, we can connect to a given bucket using the following:
 
@@ -144,7 +144,7 @@ bucket=s3_client.Bucket(name='paas-s3-broker-prod-lon-XXXX')
 
 ---
 
-#### Uploading a file to a bucket
+### Uploading a file to a bucket
 
 Once connected to a bucket, we can then manage files within it.
 
@@ -154,7 +154,7 @@ bucket.upload_file(key='mykey.txt', filename='mykey.txt')
 
 ---
 
-#### Accessing a file within the bucket
+### Accessing a file within the bucket
 
 As we are no longer wanting to store CSV's within the repo, we need to make a request to our s3 backing service to get out data.
 Pandas ```read_csv(...)``` is able to read directly from a file-like object such as our expected response from S3, which we get using ```s3.Object(...).get()['Body]```.
@@ -170,7 +170,7 @@ df = pd.read_csv(response_content)
 ## Setting up GitHub manual reviewers for deployment
 1. From the GitHub repository click ```Settings```, then ```New environment```, provide a name for the environment and click ```Configure environment```.
 ![](images/github-envrionments.png)
-2. Tick ```Required reviewers``` and enter usernames/team-name, then click ```Save protection rules```.
+2. Tick ```Required reviewers``` and enter usernames/team-name, then click ```Save protection rules```. GitHub Actions will then require someone from that group to approve the job with the environment set, before it can run.
 3. Reference the new environment within the GitHub Actions workflow file at the job level e.g.:
 ```
 jobs:
@@ -181,7 +181,7 @@ jobs:
     concurrency: production_environment
     needs: [deploy-staging]
 ```
-4. From the GitHub repository click ```Settings```, then ```Environments```, click on the environemnt to configure and click ```Add secret```.
+4. From the GitHub repository click ```Settings```, then ```Environments```, click on the environment to configure and click ```Add secret```.
 5. Secrets can be used within GitHub Actions using: ```${{secrets.<secret_name>}}```
    1. Secrets at the environment level will take precedence over repository level secrets. 
 
