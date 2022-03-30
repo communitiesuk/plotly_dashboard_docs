@@ -8,8 +8,11 @@
    3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
    4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
 3. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
-4. [Key terms](#key-terms)
-5. [References](#references)
+4. [Setting up Ip filtering](#setting-up-ip-filtering)
+   1. [Creating the ip filtering application](#creating-the-ip-filtering-application)
+   2. [Setting up Gov UK PaaS](#setting-up-gov-uk-paas)
+5. [Key terms](#key-terms)
+6. [References](#references)
 
 ## Creating an AWS S3 backing service
 
