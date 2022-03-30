@@ -1,29 +1,18 @@
 # Publication of a DLUHC owned dashboard.
 
 ## Table of contents
-1. [Buckets](#s3-buckets)
-   1. [Creating a bucket](#creating-a-bucket)
-   2. [Using a private bucket](#using-a-private-bucket)
-      1. [Connecting to s3](#connecting-to-s3)
-      2. [Accessing a bucket](#accessing-a-bucket)
-      3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
-      4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
-   3. [Key terms](#key-terms)
-   4. [References](#references)
-2. [Useful Cloud Foundry commands](#useful-cloud-foundry-commands)
+1. [Creating a S3 bucket](#creating-a-s3-bucket)
+2. [Accessing a private S3 bucket](#using-a-private-bucket)
+   1. [Connecting to s3](#connecting-to-s3)
+   2. [Connecting to a bucket](#connecting-to-a-bucket)
+   3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
+   4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
+3. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
+4. [Key terms](#key-terms)
+5. [References](#references)
 
-## s3 buckets 
+## Creating an AWS S3 backing service
 
-### Key terms
-SERVICE_NAME = Unique identifier for the bucket
-
-APP_NAME = The application set up within GovUK PaaS
-
-SERVICE_KEY = Unique identifier for external access credentials
-
----
-
-### Creating a bucket 
 
 The following are steps to take inorder to create a s3 bucket backing service within GovUK PaaS
 
@@ -56,12 +45,12 @@ cf service-key SERVICE_NAME SERVICE_KEY
 ```
 
 ---
-### Using a private bucket
+## Accessing a private S3 bucket in Python
 
-#### Connecting to s3
-In order to connect to s3, you will need an AWS access key and an AWS secret access key.
-
-##### To get credentials for the APP to the backing service use:
+### Connecting to S3
+In order to connect to S3, you will need an AWS access key and an AWS secret access key.
+ 
+To get credentials for the APP to the backing service use:
 ```bash
 cf env APP_NAME
 ```
@@ -99,7 +88,7 @@ VCAP_SERVICES: {
 
 ---
 
-##### To get credentials for a service key use:
+#### To get credentials for a service key use:
 ```bash
 cf service-key SERVICE-NAME SERVICE-KEY
 ```
@@ -133,7 +122,7 @@ s3_client=boto3.resource(
 
 ---
 
-#### Accessing a bucket
+### Connecting to a bucket
 
 Using the resource object, we can connect to a given bucket using the following:
 
@@ -143,7 +132,7 @@ bucket=s3_client.Bucket(name='paas-s3-broker-prod-lon-XXXX')
 
 ---
 
-#### Uploading a file to a bucket
+### Uploading a file to a bucket
 
 Once connected to a bucket, we can then manage files within it.
 
@@ -153,7 +142,7 @@ bucket.upload_file(key='mykey.txt', filename='mykey.txt')
 
 ---
 
-#### Accessing a file within the bucket
+### Accessing a file within the bucket
 
 As we are no longer wanting to store CSV's within the repo, we need to make a request to our s3 backing service to get out data.
 Pandas ```read_csv(...)``` is able to read directly from a file-like object such as our expected response from S3, which we get using ```s3.Object(...).get()['Body]```.
@@ -166,23 +155,76 @@ df = pd.read_csv(response_content)
 
 ---
 
-### References
+## Setting up GitHub manual reviewers for deployment
+A manual review process is ideal to have for a production environment as it prevents code that is yet to be manually tested reaching the public.
+This instead allows for time to be taken between a staging deployment, to make sure everything is working as expected.
+
+1. From the GitHub repository click ```Settings```, then ```New environment```, provide a name for the environment and click ```Configure environment```.
+![](images/github-envrionments.png)
+2. Tick ```Required reviewers``` and enter usernames/team-name, then click ```Save protection rules```. GitHub Actions will then require someone from that group to approve the job with the environment set, before it can run.
+3. Reference the new environment within the GitHub Actions workflow file at the job level e.g.:
+```
+jobs:
+  deploy-production:
+    name: 'Deploy to production Gov PaaS'
+    runs-on: ubuntu-20.04
+    environment: '<environment_name>'
+    concurrency: production_environment
+    needs: [deploy-staging]
+```
+4. From the GitHub repository click ```Settings```, then ```Environments```, click on the environment to configure and click ```Add secret```.
+5. Secrets can be used within GitHub Actions using: ```${{secrets.<secret_name>}}```
+   1. Secrets at the environment level will take precedence over repository level secrets. 
+
+### Setting up manual reviewers from different groups
+
+If your application requires approval from two groups e.g. Approval from a product manager and an approval from the development team,
+follow these instructions:
+
+1. Create separate environments for each of the groups you require approval from. See [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment).
+2. Add the required reviewers as appropriate. e.g. Developers in the developer environment and product managers in product manager environment.
+3. Within the GitHub action, create a job for each of the environments e.g.:
+```yml
+jobs:
+   tech_approval:
+    name: 'Tech approval'
+    environment: 'prod-tech'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: 'Tech approved'
+        run: echo 'Technical approved'
+   
+   product_approval:
+    name: 'Product manager approval'
+    environment: 'prod-product'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: 'Product manager approved'
+        run: echo 'Product manager approved'
+```
+4. For the job that you require manual approval on, add the ```needs: [tech_approval, product_approval]``` to that job. e.g.:
+```yml
+jobs:
+  deploy-production:
+    name: 'Deploy to production Gov PaaS'
+    runs-on: ubuntu-20.04
+    needs: [product_approval, tech_approval]
+```
+
+---
+
+### Key terms
+SERVICE_NAME = Unique identifier for the bucket
+
+APP_NAME = The application set up within GovUK PaaS
+
+SERVICE_KEY = Unique identifier for external access credentials
+
+---
+
+## References
 https://docs.cloud.service.gov.uk/deploying_services/s3/#bind-an-aws-s3-bucket-to-your-app
 
 https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html
 
----
-
-## Useful Cloud Foundry commands
-
-Get environment variables:
-```bash
-cf env APP_NAME
-```
-
----
-
-get service key credentials
-```bash
-cf service-key SERVICE_NAME SERVICE_KEY
-```
+https://cloudlumberjack.com/posts/github-actions-approvals/ 
