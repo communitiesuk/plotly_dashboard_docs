@@ -156,6 +156,9 @@ df = pd.read_csv(response_content)
 ---
 
 ## Setting up GitHub manual reviewers for deployment
+A manual review process is ideal to have for a production environment as it prevents code that is yet to be manually tested reaching the public.
+This instead allows for time to be taken between a staging deployment, to make sure everything is working as expected.
+
 1. From the GitHub repository click ```Settings```, then ```New environment```, provide a name for the environment and click ```Configure environment```.
 ![](images/github-envrionments.png)
 2. Tick ```Required reviewers``` and enter usernames/team-name, then click ```Save protection rules```. GitHub Actions will then require someone from that group to approve the job with the environment set, before it can run.
