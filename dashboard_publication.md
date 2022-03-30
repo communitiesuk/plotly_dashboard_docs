@@ -153,6 +153,14 @@ response_content = s3.Object('paas-s3-broker-prod-lon-XXXX', "mykey.txt").get()[
 df = pd.read_csv(response_content)
 ```
 
+If you have different buckets for different enivronments the bucket name should be set as an environment variable that can be retrieved through the code.  
+
+```python
+import os
+bucket_name = os.environ("bucket_name").get()
+response_content = s3.Object(bucket_name, "mykey.txt").get()['Body']
+```
+
 ---
 
 ## Setting up GitHub manual reviewers for deployment
