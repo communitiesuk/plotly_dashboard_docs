@@ -246,11 +246,17 @@ cf bind-route-service DOMAIN SERVICE_INSTANCE --hostname HOSTNAME
 ---
 
 ### Key terms
-SERVICE_NAME = Unique identifier for the bucket
+SERVICE_NAME = Unique identifier for the bucket.
 
-APP_NAME = The application set up within GovUK PaaS
+APP_NAME = The application set up within GovUK PaaS.
 
-SERVICE_KEY = Unique identifier for external access credentials
+SERVICE_KEY = Unique identifier for external access credentials.
+
+SERVICE_INSTANCE = A unique name for a service.
+
+ROUTE_SERVICE_URL = The url of the route service endpoint. An example of this is ```https://my-basic-auth-service-app.london.cloudapps.digital```
+
+HOSTNAME = The host or app name assigned to an app.
 
 ---
 
