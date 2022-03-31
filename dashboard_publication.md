@@ -153,7 +153,15 @@ response_content = s3.Object('paas-s3-broker-prod-lon-XXXX', "mykey.txt").get()[
 df = pd.read_csv(response_content)
 ```
 
-If you have different buckets for different enivronments the bucket name should be set as an environment variable that can be retrieved through the code.  
+If you have different buckets for different environments the bucket name should be set as an environment variable that can be retrieved through the code.  
+
+#### Setting the environment variable using cloudfoundry:
+
+```bash
+cf set-env APP_NAME ENVIRONMENT_VARIABLE VALUE
+```
+
+#### Accessing the environment variable within Python:
 
 ```python
 import os
