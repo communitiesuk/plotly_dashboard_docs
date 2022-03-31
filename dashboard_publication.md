@@ -134,7 +134,7 @@ s3_client = boto3.resource('s3')
 
 Using environment variables for credentials requires the following environment variables to set on the server.
 
-```python
+```
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 AWS_REGION
