@@ -26,6 +26,9 @@ cf create-service aws-s3-bucket default SERVICE_NAME
 
 --- 
 
+Once the service has been created you will need to create credentials for the application to the bucket. 
+This is done by binding the service to the application.
+
 Bind the bucket to the application
 ```bash
 cf bind-service APP_NAME SERVICE_NAME -c '{"permissions": "PERMISSION"}'
@@ -33,30 +36,7 @@ cf bind-service APP_NAME SERVICE_NAME -c '{"permissions": "PERMISSION"}'
 
 Permissions can be `read-write` or `read-only`. The dashboard should only have readonly permissions.
 
----
-
-Create credentials to allow for outside access to the bucket
-
-```bash
-cf create-service-key SERVICE_NAME SERVICE_KEY -c '{"allow_external_access": true}'
-```
-
-Credentials for the created key can be accessed by the following command:
-
-```bash
-cf service-key SERVICE_NAME SERVICE_KEY
-```
-
----
-## Accessing a private S3 bucket in Python
-
-### Connecting to S3
-In order to connect to S3, you will need an AWS access key and an AWS secret access key.
- 
-To get credentials for the APP to the backing service use:
-```bash
-cf env APP_NAME
-```
+These credentials can be found by running ```cf env APP_NAME``` after binding.
 
 These will be under VCAP_SERVICES
 
@@ -89,7 +69,30 @@ VCAP_SERVICES: {
 }
 ```
 
+**NOTE**
+
+Having the environment variables set in this way will not work when using boto3. 
+See [Accessing a private S3 bucket in python](#accessing-a-private-s3-bucket-in-python) 
+
 ---
+
+Create credentials to allow for outside access to the bucket
+
+```bash
+cf create-service-key SERVICE_NAME SERVICE_KEY -c '{"allow_external_access": true}'
+```
+
+Credentials for the created key can be accessed by the following command:
+
+```bash
+cf service-key SERVICE_NAME SERVICE_KEY
+```
+
+---
+## Accessing a private S3 bucket in Python
+
+### Connecting to S3
+In order to connect to S3, you will need an AWS access key and an AWS secret access key.
 
 #### To get credentials for a service key use:
 ```bash
@@ -123,7 +126,31 @@ s3_client=boto3.resource(
 )
 ```
 
+It is also possible to connect to an S3 bucket without providing the credentials in the python code.
+The boto3 package will first look in the environment variables for credentials if not provided. E.g.:
+
+```python
+import boto3
+
+s3_client = boto3.resource('s3')
+```
+
+Using environment variables for credentials requires the following environment variables to set on the server. 
+See [Setting environment variables using cloudfoundry](#setting-environment-variables-using-cloudfoundry).
+
+```
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION
+```
+
 ---
+
+#### Setting environment variables using cloudfoundry
+
+```bash
+cf set-env APP_NAME ENVIRONMENT_VARIABLE VALUE
+```
 
 ### Connecting to a bucket
 
@@ -154,6 +181,17 @@ Pandas ```read_csv(...)``` is able to read directly from a file-like object such
 response_content = s3.Object('paas-s3-broker-prod-lon-XXXX', "mykey.txt").get()['Body']
 
 df = pd.read_csv(response_content)
+```
+
+If you have different buckets for different environments the bucket name should be set as an environment variable that can be retrieved through the code.
+See [Setting environment variables using cloudfoundry](#setting-environment-variables-using-cloudfoundry).
+
+#### Accessing the environment variable within Python:
+
+```python
+import os
+bucket_name = os.environ("bucket_name").get()
+response_content = s3.Object(bucket_name, "mykey.txt").get()['Body']
 ```
 
 ---
