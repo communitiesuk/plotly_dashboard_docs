@@ -8,8 +8,11 @@
    3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
    4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
 3. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
-4. [Key terms](#key-terms)
-5. [References](#references)
+4. [Setting up Ip filtering](#setting-up-ip-filtering)
+   1. [Creating the ip filtering application](#creating-the-ip-filtering-application)
+   2. [Setting up Gov UK PaaS](#setting-up-gov-uk-paas)
+5. [Key terms](#key-terms)
+6. [References](#references)
 
 ## Creating an AWS S3 backing service
 
@@ -249,12 +252,47 @@ jobs:
 
 ---
 
+## Setting up Ip filtering
+
+Due to how Gov UK PaaS works, it is not possible to enable IP filtering alongside basic authentication.
+It's not possible to set up two routing services on the same hostname meaning only one or the other can be used.
+It is possible however to implement these checks into your application code if required. We will not go through that here.
+
+### Creating the ip filtering application
+
+In order to provide ip filtering the following application can be downloaded from github:
+
+```bash
+git clone https://github.com/alphagov/paas-ip-authentication-route-service.git
+```
+
+Follow the read me for that application on how to add ip addresses you wish to allow access to.
+
+### Setting up Gov UK PaaS
+
+Follow the instructions in the readme on how to push the application up to Gov UK PaaS.
+
+Once the application is on the PaaS, it will need to be set up as a route service using the following commands:
+
+```bash
+cf create-user-provided-service SERVICE_INSTANCE -r ROUTE_SERVICE_URL
+cf bind-route-service DOMAIN SERVICE_INSTANCE --hostname HOSTNAME
+```
+
+---
+
 ### Key terms
-SERVICE_NAME = Unique identifier for the bucket
+SERVICE_NAME = Unique identifier for the bucket.
 
-APP_NAME = The application set up within GovUK PaaS
+APP_NAME = The application set up within GovUK PaaS.
 
-SERVICE_KEY = Unique identifier for external access credentials
+SERVICE_KEY = Unique identifier for external access credentials.
+
+SERVICE_INSTANCE = A unique name for a service.
+
+ROUTE_SERVICE_URL = The url of the route service endpoint. An example of this is ```https://my-basic-auth-service-app.london.cloudapps.digital```
+
+HOSTNAME = The host or app name assigned to an app.
 
 ---
 
