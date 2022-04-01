@@ -135,7 +135,8 @@ import boto3
 s3_client = boto3.resource('s3')
 ```
 
-Using environment variables for credentials requires the following environment variables to set on the server.
+Using environment variables for credentials requires the following environment variables to set on the server. 
+See [Setting environment variables using cloudfoundry](#setting-environment-variables-using-cloudfoundry).
 
 ```
 AWS_ACCESS_KEY_ID
@@ -144,6 +145,12 @@ AWS_REGION
 ```
 
 ---
+
+#### Setting environment variables using cloudfoundry
+
+```bash
+cf set-env APP_NAME ENVIRONMENT_VARIABLE VALUE
+```
 
 ### Connecting to a bucket
 
@@ -176,13 +183,8 @@ response_content = s3.Object('paas-s3-broker-prod-lon-XXXX', "mykey.txt").get()[
 df = pd.read_csv(response_content)
 ```
 
-If you have different buckets for different environments the bucket name should be set as an environment variable that can be retrieved through the code.  
-
-#### Setting the environment variable using cloudfoundry:
-
-```bash
-cf set-env APP_NAME ENVIRONMENT_VARIABLE VALUE
-```
+If you have different buckets for different environments the bucket name should be set as an environment variable that can be retrieved through the code.
+See [Setting environment variables using cloudfoundry](#setting-environment-variables-using-cloudfoundry).
 
 #### Accessing the environment variable within Python:
 
