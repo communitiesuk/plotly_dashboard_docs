@@ -198,15 +198,37 @@ response_content = s3.Object(bucket_name, "mykey.txt").get()['Body']
 ---
 
 ### Copying a file from one bucket to another bucket
-
-Once connected to both buckets (bucket1 and bucket2), see [Connecting to a bucket](#connecting-to-a-bucket), we can then manage files within each bucket. For example, to copy files from bucket1 to bucket2:
+In order to move files across buckets in different s3 instances, connection will need to be made to each bucket.
 
 ```python
-# Access files within bucket1
-response_content = s3.Object("bucket1_name", "mykey.txt").get()['Body']
-# Upload files to bucket2
-bucket2.upload_fileobj(response_content, "mykey.txt")
+    # Connecting to the staging bucket using the given credentials.
+    s3_client_staging = boto3.resource(
+        "s3",
+        aws_access_key_id=key_id_staging,
+        aws_secret_access_key=access_key_staging,
+        region_name=region_name_staging,
+    )
+
+    # Connecting to the production bucket using the given credentials.
+    s3_client_production = boto3.resource(
+        "s3",
+        aws_access_key_id=key_id_production,
+        aws_secret_access_key=access_key_production,
+        region_name=region_name_production,
+    )
+    production_bucket = s3_client_production.Bucket(name=bucket_name_production)
 ```
+
+Once connected to both buckets (staging_bucket and production_bucket), we can then manage files within each bucket. For example, to copy files from staging_bucket to production_bucket:
+
+```python
+# Access files within staging_bucket
+response_content = s3_client_staging.Object(bucket_name_staging, file).get()["Body"]
+# Upload files to production_bucket
+production_bucket.upload_fileobj(response_content, file)
+```
+
+**Note:** We don't use a bucket object for downloading the file, this is because the ```download_fileobj(...)``` function requires a file-like object that must implement the read method, whereas ```upload_fileobj(...)``` requires the write method.
 
 ---
 
