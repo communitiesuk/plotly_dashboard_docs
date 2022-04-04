@@ -196,6 +196,23 @@ response_content = s3.Object(bucket_name, "mykey.txt").get()['Body']
 
 ---
 
+### Copying a file from one bucket to another bucket
+
+Once connected to both buckets (bucket1 and bucket2), we can then manage files within each bucket. For example, to copy files from bucket1 to bucket2:
+
+```python
+# Access files within bucket1
+response_content = s3_client_staging.Object(bucket_name_1, file).get()[
+            "Body"
+        ]
+
+response_content = s3.Object(bucket1_name, "mykey.txt").get()['Body']
+# Upload files to bucket2
+production_bucket.upload_fileobj(response_content, file)
+```
+
+---
+
 ## Setting up GitHub manual reviewers for deployment
 A manual review process is ideal to have for a production environment as it prevents code that is yet to be manually tested reaching the public.
 This instead allows for time to be taken between a staging deployment, to make sure everything is working as expected.
