@@ -7,6 +7,7 @@
    2. [Connecting to a bucket](#connecting-to-a-bucket)
    3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
    4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
+   5. [Copying a file from one bucket to another bucket](#copying-a-file-from-one-bucket-to-another-bucket)
 3. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
 4. [Setting up Ip filtering](#setting-up-ip-filtering)
    1. [Creating the ip filtering application](#creating-the-ip-filtering-application)
@@ -198,17 +199,13 @@ response_content = s3.Object(bucket_name, "mykey.txt").get()['Body']
 
 ### Copying a file from one bucket to another bucket
 
-Once connected to both buckets (bucket1 and bucket2), we can then manage files within each bucket. For example, to copy files from bucket1 to bucket2:
+Once connected to both buckets (bucket1 and bucket2), see [Connecting to a bucket](#connecting-to-a-bucket), we can then manage files within each bucket. For example, to copy files from bucket1 to bucket2:
 
 ```python
 # Access files within bucket1
-response_content = s3_client_staging.Object(bucket_name_1, file).get()[
-            "Body"
-        ]
-
-response_content = s3.Object(bucket1_name, "mykey.txt").get()['Body']
+response_content = s3.Object("bucket1_name", "mykey.txt").get()['Body']
 # Upload files to bucket2
-production_bucket.upload_fileobj(response_content, file)
+bucket2.upload_fileobj(response_content, "mykey.txt")
 ```
 
 ---
