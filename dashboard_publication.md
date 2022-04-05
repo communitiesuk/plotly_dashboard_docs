@@ -2,17 +2,17 @@
 
 ## Table of contents
 1. [Deploying to Gov UK PaaS](#deploying-to-gov-uk-paas)
-2. [Creating a S3 bucket](#creating-a-s3-bucket)
-3. [Accessing a private S3 bucket](#using-a-private-bucket)
+2. [Setting up Ip filtering](#setting-up-ip-filtering)
+   1. [Creating the ip filtering application](#creating-the-ip-filtering-application)
+   2. [Creating and binding the route service](#creating-and-binding-the-route-service)
+3. [Creating a S3 bucket](#creating-a-s3-bucket)
+4. [Accessing a private S3 bucket](#using-a-private-bucket)
    1. [Connecting to s3](#connecting-to-s3)
    2. [Connecting to a bucket](#connecting-to-a-bucket)
    3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
    4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
    5. [Copying a file from one bucket to another bucket](#copying-a-file-from-one-bucket-to-another-bucket)
-4. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
-5. [Setting up Ip filtering](#setting-up-ip-filtering)
-   1. [Creating the ip filtering application](#creating-the-ip-filtering-application)
-   2. [Setting up Gov UK PaaS](#setting-up-gov-uk-paas)
+5. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
 6. [Key terms](#key-terms)
 7. [References](#references)
 
@@ -24,7 +24,7 @@
 ```yml
 ---
 applications:
-  - name: <application_name>
+  - name: <APP_NAME>
     memory: 2GB
     disk_quota: 3GB
     command: gunicorn run:server --env STAGE=production
@@ -32,12 +32,67 @@ applications:
       - python_buildpack
 ```
 4. Log in to Gov UK PaaS through Cloud Foundry:
-```cf login -a api.london.cloud.service.gov.uk -u <username>```
+```bash
+cf login -a api.london.cloud.service.gov.uk -u <USERNAME>
+```
 5. This will ask you for a password, enter your Gov UK PaaS password. 
 6. If a space has not already been created, you will need to create a space using:
-```cf create-space <SPACE NAME> -o <ORGANISATION>```
+```bash
+cf create-space <SPACE NAME> -o <ORGANISATION>
+```
 7. Once the space has been created, you will need to target that space using:
-```cf target -s <SPACE NAME>```
+```bash
+cf target -s <SPACE NAME>
+```
+8. Push the application using:
+```bash
+cf push <APP_NAME>
+```
+
+**Note:** When pushing without routes set in the ```manifest.yml``` Cloud Foundry will create a route using the application name. This can cause an error to be thrown if that route is already in use. Adding the ```--no-route``` flag will prevent this from happening. 
+
+**Note:** Use the ```--strategy rolling``` command to minimise/eliminate downtime of the application.
+
+9. If using the ```--no-route``` flag, you will need to create a route for your application using:
+```bash
+cf create-route <DOMAIN> --hostname <HOSTNAME>
+```
+10. Once you have created your route, the route will need to be mapped to your application using:
+```bash
+cf map-route <APP_NAME> <DOMAIN> --hostname <HOSTNAME>
+```
+
+---
+
+## Setting up Ip filtering
+
+Due to how Gov UK PaaS works, it is not possible to enable IP filtering alongside basic authentication.
+It's not possible to set up two routing services on the same hostname meaning only one or the other can be used.
+It is possible however to implement these checks into your application code if required. We will not go through that here.
+
+### Creating the ip filtering application
+
+In order to provide ip filtering the following application can be downloaded from github:
+
+```bash
+git clone https://github.com/alphagov/paas-ip-authentication-route-service.git
+```
+
+Follow the read me for that application on how to add ip addresses you wish to allow access to.
+
+### Creating and binding the route service
+
+Follow the instructions in the readme on how to push the application up to Gov UK PaaS.
+
+Once the application is on the PaaS, it will need to be set up as a route service using the following commands:
+
+```bash
+cf create-user-provided-service SERVICE_INSTANCE -r ROUTE_SERVICE_URL
+cf bind-route-service DOMAIN SERVICE_INSTANCE --hostname HOSTNAME
+```
+
+---
+
 
 ## Creating an AWS S3 backing service
 
@@ -310,35 +365,6 @@ jobs:
     name: 'Deploy to production Gov PaaS'
     runs-on: ubuntu-20.04
     needs: [product_approval, tech_approval]
-```
-
----
-
-## Setting up Ip filtering
-
-Due to how Gov UK PaaS works, it is not possible to enable IP filtering alongside basic authentication.
-It's not possible to set up two routing services on the same hostname meaning only one or the other can be used.
-It is possible however to implement these checks into your application code if required. We will not go through that here.
-
-### Creating the ip filtering application
-
-In order to provide ip filtering the following application can be downloaded from github:
-
-```bash
-git clone https://github.com/alphagov/paas-ip-authentication-route-service.git
-```
-
-Follow the read me for that application on how to add ip addresses you wish to allow access to.
-
-### Setting up Gov UK PaaS
-
-Follow the instructions in the readme on how to push the application up to Gov UK PaaS.
-
-Once the application is on the PaaS, it will need to be set up as a route service using the following commands:
-
-```bash
-cf create-user-provided-service SERVICE_INSTANCE -r ROUTE_SERVICE_URL
-cf bind-route-service DOMAIN SERVICE_INSTANCE --hostname HOSTNAME
 ```
 
 ---
