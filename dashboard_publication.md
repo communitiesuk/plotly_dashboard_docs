@@ -1,19 +1,43 @@
 # Publication of a DLUHC owned dashboard.
 
 ## Table of contents
-1. [Creating a S3 bucket](#creating-a-s3-bucket)
-2. [Accessing a private S3 bucket](#using-a-private-bucket)
+1. [Deploying to Gov UK PaaS](#deploying-to-gov-uk-paas)
+2. [Creating a S3 bucket](#creating-a-s3-bucket)
+3. [Accessing a private S3 bucket](#using-a-private-bucket)
    1. [Connecting to s3](#connecting-to-s3)
    2. [Connecting to a bucket](#connecting-to-a-bucket)
    3. [Uploading a file to a bucket](#uploading-a-file-to-a-bucket)
    4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
    5. [Copying a file from one bucket to another bucket](#copying-a-file-from-one-bucket-to-another-bucket)
-3. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
-4. [Setting up Ip filtering](#setting-up-ip-filtering)
+4. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
+5. [Setting up Ip filtering](#setting-up-ip-filtering)
    1. [Creating the ip filtering application](#creating-the-ip-filtering-application)
    2. [Setting up Gov UK PaaS](#setting-up-gov-uk-paas)
-5. [Key terms](#key-terms)
-6. [References](#references)
+6. [Key terms](#key-terms)
+7. [References](#references)
+
+## Deploying to Gov UK PaaS
+
+1. You will need an application you want to deploy, a Gov UK PaaS account and Cloud Foundry installed on your machine.
+2. Navigate to your application.
+3. Create a ```manifest.yml``` file, which will be used by Cloud Foundry when deploying your application. For example:
+```yml
+---
+applications:
+  - name: <application_name>
+    memory: 2GB
+    disk_quota: 3GB
+    command: gunicorn run:server --env STAGE=production
+    buildpacks:
+      - python_buildpack
+```
+4. Log in to Gov UK PaaS through Cloud Foundry:
+```cf login -a api.london.cloud.service.gov.uk -u <username>```
+5. This will ask you for a password, enter your Gov UK PaaS password. 
+6. If a space has not already been created, you will need to create a space using:
+```cf create-space <SPACE NAME> -o <ORGANISATION>```
+7. Once the space has been created, you will need to target that space using:
+```cf target -s <SPACE NAME>```
 
 ## Creating an AWS S3 backing service
 
