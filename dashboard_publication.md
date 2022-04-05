@@ -20,7 +20,7 @@
 
 1. You will need an application you want to deploy, a Gov UK PaaS account and Cloud Foundry installed on your machine.
 2. Navigate to your application.
-3. Create a ```manifest.yml``` file, which will be used by Cloud Foundry when deploying your application. For example:
+3. Create a ```manifest.yml``` file, which will be used by Cloud Foundry when deploying your application. For example, for a python application:
 ```yml
 ---
 applications:
@@ -298,6 +298,8 @@ In order to move files across buckets in different s3 instances, connection will
     production_bucket = s3_client_production.Bucket(name=bucket_name_production)
 ```
 
+**Note:** We don't use a bucket object for downloading the file, this is because the ```download_fileobj(...)``` function requires a file-like object that must implement the read method, whereas ```upload_fileobj(...)``` requires the write method.
+
 Once connected to both buckets (staging_bucket and production_bucket), we can then manage files within each bucket. For example, to copy files from staging_bucket to production_bucket:
 
 ```python
@@ -306,8 +308,6 @@ response_content = s3_client_staging.Object(bucket_name_staging, file).get()["Bo
 # Upload files to production_bucket
 production_bucket.upload_fileobj(response_content, file)
 ```
-
-**Note:** We don't use a bucket object for downloading the file, this is because the ```download_fileobj(...)``` function requires a file-like object that must implement the read method, whereas ```upload_fileobj(...)``` requires the write method.
 
 ---
 
