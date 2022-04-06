@@ -2,8 +2,8 @@
 
 ## Table of contents
 1. [Deploying to Gov UK PaaS](#deploying-to-gov-uk-paas)
-2. [Setting up Ip filtering](#setting-up-ip-filtering)
-   1. [Creating the ip filtering application](#creating-the-ip-filtering-application)
+2. [Setting up IP filtering](#setting-up-ip-filtering)
+   1. [Creating the IP filtering application](#creating-the-ip-filtering-application)
    2. [Creating and binding the route service](#creating-and-binding-the-route-service)
 3. [Creating a S3 bucket](#creating-a-s3-bucket)
 4. [Accessing a private S3 bucket](#using-a-private-bucket)
@@ -64,21 +64,21 @@ cf map-route <APP_NAME> <DOMAIN> --hostname <HOSTNAME>
 
 ---
 
-## Setting up Ip filtering
+## Setting up IP filtering
 
 Due to how Gov UK PaaS works, it is not possible to enable IP filtering alongside basic authentication.
 It's not possible to set up two routing services on the same hostname meaning only one or the other can be used.
 It is possible however to implement these checks into your application code if required. We will not go through that here.
 
-### Creating the ip filtering application
+### Creating the IP filtering application
 
-In order to provide ip filtering the following application can be downloaded from github:
+In order to provide IP filtering the following application can be downloaded from github:
 
 ```bash
-git clone https://github.com/alphagov/paas-ip-authentication-route-service.git
+git clone https://github.com/alphagov/paas-IP-authentication-route-service.git
 ```
 
-Follow the read me for that application on how to add ip addresses you wish to allow access to.
+Follow the read me for that application on how to add IP addresses you wish to allow access to.
 
 ### Creating and binding the route service
 
