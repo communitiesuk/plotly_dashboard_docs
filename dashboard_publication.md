@@ -49,7 +49,7 @@ cf target -s <SPACE NAME>
 cf push <APP_NAME>
 ```
 
-**Note:** When pushing without routes set in the ```manifest.yml``` Cloud Foundry will create a route using the application name. This can cause an error to be thrown if that route is already in use. Adding the ```--no-route``` flag will prevent this from happening. 
+**Note:** When pushing without routes set in the ```manifest.yml``` Cloud Foundry will create and map a route using the application name. This can cause an error to be thrown if that route is already in use. Adding the ```--no-route``` flag will prevent this from happening. 
 
 **Note:** Use the ```--strategy rolling``` command to minimise/eliminate downtime of the application.
 
@@ -65,6 +65,8 @@ cf map-route <APP_NAME> <DOMAIN> --hostname <HOSTNAME>
 ---
 
 ## Setting up IP filtering
+
+If you want to restrict access to certain IP's for secuity purposes, this can be done using IP filtering.
 
 Due to how Gov UK PaaS works, it is not possible to enable IP filtering alongside basic authentication.
 It's not possible to set up two routing services on the same hostname meaning only one or the other can be used.
@@ -293,6 +295,7 @@ In order to move files across buckets in different s3 instances, connection will
 Once connected to both buckets (staging_bucket and production_bucket), we can then manage files within each bucket. For example, to copy files from staging_bucket to production_bucket:
 
 ```python
+file="data.csv"
 # Access files within staging_bucket
 response_content = staging_bucket.Object(file).get()["Body"]
 # Upload files to production_bucket
@@ -364,11 +367,15 @@ jobs:
 ### Key terms
 SERVICE_NAME = Unique identifier for the bucket.
 
+SPACE_NAME = A unique identifier for a space.
+
 APP_NAME = The application set up within GovUK PaaS.
+
+ORGANISATION = A unique identifier for your organisation within Gov UK PaaS.
 
 SERVICE_KEY = Unique identifier for external access credentials.
 
-SERVICE_INSTANCE = A unique name for a service.
+SERVICE_INSTANCE = A unique identifier for a service.
 
 ROUTE_SERVICE_URL = The url of the route service endpoint. An example of this is ```https://my-basic-auth-service-app.london.cloudapps.digital```
 
