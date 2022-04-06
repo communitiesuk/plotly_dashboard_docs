@@ -98,6 +98,7 @@ cf bind-route-service DOMAIN SERVICE_INSTANCE --hostname HOSTNAME
 
 ## Creating an AWS S3 backing service
 
+If your application uses files that you do not want within your source code, S3 buckets is an option to store files that can be securely accessed over the internet using secret access keys known only by the application.
 
 The following are steps to take inorder to create a s3 bucket backing service within GovUK PaaS
 
