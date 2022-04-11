@@ -93,7 +93,7 @@ cf bind-route-service DOMAIN SERVICE_INSTANCE --hostname HOSTNAME
 
 **Note:** For this command the HOSTNAME is that of the application you want to lock down.
 
-**Note:** For applications with multiple routes, each hostname will need to be bound to in order to fully lock down the application.
+For applications with multiple routes, each hostname will need to be bound to in order to fully lock down the application.
 
 ---
 
