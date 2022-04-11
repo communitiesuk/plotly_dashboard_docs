@@ -374,6 +374,9 @@ ROUTE_SERVICE_URL = The url of the route service endpoint. An example of this is
 
 HOSTNAME = The host or app name assigned to an app.
 
+DOMAIN = The location of a website. A list of available domains can be found using the following command:
+`cf domains`
+
 ---
 
 ## References
