@@ -114,11 +114,22 @@ Once the service has been created you will need to create credentials for the ap
 This is done by binding the service to the application.
 
 Bind the bucket to the application
+
+Create a json file containing:
+```json
+{"permissions": "PERMISSION"}
+```
+
 ```bash
-cf bind-service APP_NAME SERVICE_NAME -c '{"permissions": "PERMISSION"}'
+cf bind-service APP_NAME SERVICE_NAME -c <json.file>
 ```
 
 Permissions can be `read-write` or `read-only`. The dashboard should only have readonly permissions.
+
+**Note:** If using a MAC, this can be done using inline json:
+```bash
+cf bind-service APP_NAME SERVICE_NAME -c `{"permissions": "PERMISSION"}`
+```
 
 These credentials can be found by running ```cf env APP_NAME``` after binding.
 
@@ -162,6 +173,16 @@ See [Accessing a private S3 bucket in python](#accessing-a-private-s3-bucket-in-
 
 Create credentials to allow for outside access to the bucket
 
+Create a json file, containing:
+```json 
+{"allow_external_access": true}
+```
+
+```bash
+cf create-service-key SERVICE_NAME SERVICE_KEY -c <file.json>
+```
+
+**Note:** If using a MAC, this can be done using inline json:
 ```bash
 cf create-service-key SERVICE_NAME SERVICE_KEY -c '{"allow_external_access": true}'
 ```
