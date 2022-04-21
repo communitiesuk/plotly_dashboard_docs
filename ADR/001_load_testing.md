@@ -8,6 +8,8 @@ Pending
 
 ## Context
 
+We explored and evaluated three open source load testing tools - K6, JMeter and Locust.io.
+
 Blazemeter can be used as an online testing framework to run all the below options in the cloud at a much larger scale than running locally / as part of a pipeline
 
 |                                        | K6   | JMeter    | Locust.io |
@@ -24,7 +26,7 @@ Blazemeter can be used as an online testing framework to run all the below optio
 ### Additional Detail
 \* Node is not installed on the DAP.
 
-\*\* Java is installed inside the DAP, however the JMeter executable needs to be downloaded and run locally. DAP has no external Internet access to aquire this file
+\*\* Java is installed inside the DAP, however the JMeter executable needs to be downloaded and run locally. DAP has no external Internet access to aquire this file. Lead time associated with getting JMeter installed in DAP through DAP support.
 
 \*\*\* K6 used node.js.
 
