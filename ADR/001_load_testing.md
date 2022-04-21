@@ -16,19 +16,16 @@ Blazemeter can be used as an online testing framework to run all the below optio
 |----------------------------------------|------|-----------|-----------|
 | Open source?                           | Y    | Y         | Y         |
 | Free to use?                           | Y    | Y         | Y         |
-| Available inside DAP?                  | N*   | N**       | Y         |
+| Available inside DAP?                  | N - Node not installed on the DAP   | N - JMeter not installed on the DAP       | Y         |
 | Runnable on local machines?            | Y    | Y         | Y         |
 | Runnable in cloud?                     | Y    | Y         | Y         |
 | Runnable in github pipeline?           | Y    | Y         | Y         |
 | Runnable without user interface?       | Y    | Y         | Y         |
-| Language experience inside DLUHC team? | N*** | N/A - GUI | Y         |
+| Language experience inside DLUHC team? | N - Unable to use node.js | N/A - GUI | Y         |
 
 ### Additional Detail
-\* Node is not installed on the DAP.
+DAP has no external Internet access to download files. Files need to be installed in DAP through DAP support, which has a lead time associated.
 
-\*\* Java is installed inside the DAP, however the JMeter executable needs to be downloaded and run locally. DAP has no external Internet access to aquire this file. Lead time associated with getting JMeter installed in DAP through DAP support.
-
-\*\*\* K6 used node.js.
 
 ## Decision
 
