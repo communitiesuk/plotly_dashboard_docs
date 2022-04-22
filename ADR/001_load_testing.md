@@ -4,7 +4,7 @@ Date: 20-April-2022
 
 ## Status
 
-Pending
+Approved
 
 ## Context
 
@@ -14,7 +14,7 @@ We explored and evaluated three load testing tools - K6, JMeter and Locust.io.
 |----------------------------------------|-----------------------------------|-------------------------------------|-----------|
 | Open source?                           | Y                                 | Y                                   | Y         |
 | Free to use?                           | Y                                 | Y                                   | Y         |
-| Available inside DAP?                  | N - Node not installed on the DAP | N - JMeter not installed on the DAP | Y         |
+| Available inside DAP?                  | Y                                 | N - JMeter not installed on the DAP | Y         |
 | Runnable on local machines?            | Y                                 | Y                                   | Y         |
 | Runnable in github pipeline?           | Y                                 | Y                                   | Y         |
 | Runnable without user interface?       | Y                                 | Y                                   | Y         |
