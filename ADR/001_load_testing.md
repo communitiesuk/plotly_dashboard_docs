@@ -22,7 +22,7 @@ We explored and evaluated three load testing tools - K6, JMeter and Locust.io.
 | Language                               | node.js (javascript)              | Java                                | Python    |
 
 ### Additional Detail
-DAP has no external Internet access to download files. ~~JMeter can be pulled across into the DAP by first downloading it onto the local machine and moving it via OneDrive, however this process can be tedious and time-consuming. See https://mhclg.sharepoint.com/sites/DataImprovementProgramme/DAP/SitePages/Utilising-OneDrive-in-the-DAP.aspx~~. JMeter uses Log4J, which has a critical security vulnerability and should not be installed on company machines due to this. 
+DAP has no external Internet access to download files. ~~JMeter can be pulled across into the DAP by first downloading it onto the local machine and moving it via OneDrive, however this process can be tedious and time-consuming. See https://mhclg.sharepoint.com/sites/DataImprovementProgramme/DAP/SitePages/Utilising-OneDrive-in-the-DAP.aspx~~. JMeter uses Log4J, which has a critical security vulnerability and IT have stated this should not be installed on company machines. 
 
 JMeter uses a GUI to define the tests which are then exported out into a .jmx file. This can then be used to run the tests without the use of a user interface
 
