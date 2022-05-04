@@ -10,8 +10,7 @@ Assuming users are active for 12 hours a day, taking into consideration lower us
 Breaking that down into a 20 minute window equates to around 46 users.
 
 ## Launch day estimate:
-
-
+We estimate the number of users on launch day to be 10 times that of our general usage estimate, equating to 460 users.
 
 
 The load test will initally focus on user routes through the dashboard, instead of simply requesting each page indidually then moving onto the next test. The benefit of this approach is we can mimic a user making choices in the available dropdowns on each of the pages.
