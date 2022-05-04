@@ -5,8 +5,8 @@ We have used a chrome plug-in, SimilarWeb to investigate other sites which could
 We will break our estimate down into 2 scenarios - General usage and Launch day (expecting a higher usage on launch)
 
 ## General usage estimate: 
-500000 monthly users / 30 days average in a month = 1667 daily users
-Assuming users are active for 12 hours a day, taking into consideration lower usage during the evening and night: 1667 daily users / 12 = 139 users per active hour
+500000 monthly users / 30 days average in a month = 1667 daily users <br>
+Assuming users are active for 12 hours a day, taking into consideration lower usage during the evening and night: 1667 daily users / 12 = 139 users per active hour <br>
 Breaking that down into a 20 minute window equates to around 46 users.
 
 ## Launch day estimate:
