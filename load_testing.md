@@ -49,7 +49,7 @@ The 95 percentile response time averaged at 400ms, however the average median ti
 There were roughly 200 requests per second, of which none failed.
 
 # Conclusion
-Based on our estimated usage of the dashboard, we expect it to be able to handle loads of up to 460 users at one time. However, at higher usage we can expect poorer performance, though this should not be longer than 1 second, which we believe to be within a reasonable range. 
+Based on our estimated usage of the dashboard, we expect it to be able to handle loads of up to 460 users at one time. However, at higher usage we can expect poorer performance, though this should not be longer than 1 second, which we believe to be within a reasonable range. [See this article on response times](https://www.nngroup.com/articles/response-times-3-important-limits/).
 
 Due to the extremely high CPU usage in the launch day scenario it is recommended that we implement auto-scaling within Gov PaaS for this application to prevent the possibility of the dashboard falling over.
 
