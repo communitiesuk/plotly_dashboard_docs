@@ -6,7 +6,7 @@ The load test will initally focus on user routes through the dashboard, instead 
 
 The first iteration of load testing will not use a web framework such as Cypress or Selenium WebDriver to control changes to the dropdowns on each of the pages. Instead the locust tests will issue new page requests with query strings values matching the desired options in the dropdowns. This will slightly skew the results as instead of an asynchronous XHR request being executed within the page, we are requesting a new page load that will have a larger page size.
 
-The metrics for these load tests will be gathered using the Prometheus platform logging for CPU usage and the Locust user interface will provide response times and failed user requests.
+Prometheus will be used to gather the CPU Usage and Request Per Second metrics; the Locust user interface will provide response time and failed user request metrics
 
 We will break our estimate down into 2 scenarios - General usage and Launch day (expecting a higher usage on launch) and run each scenario load test for 15 minutes.
 
@@ -26,13 +26,13 @@ We ran a load test where we spawned 1 user per second up to a maximum of 46 user
 We repeated this test 3 times and the results were always within the same bounds. 
 
 
-![CPU_general](images/load_test/cpu_general_usage2.PNG) <br>
+![CPU_general](images/load_test/general/cpu_general_usage2.PNG) <br>
 CPU usage peaked at just under 13% across the duration of the load test.
 
-![response_times_general](images/load_test/response_times_(ms)_1651672444.png) <br>
+![response_times_general](images/load_test/general/response_times_(ms)_1651672444.png) <br>
 The median response times stayed consistent at 30ms per request. The 95 percentile was initially high, however it quickly dropped to the range of 40ms - 60ms for the duration of the load test.
 
-![total_requests_per_second_general](images/load_test/total_requests_per_second_1651672444.png) <br>
+![total_requests_per_second_general](images/load_test/general/total_requests_per_second_1651672444.png) <br>
 There were roughly 28 requests per second, of which none failed.
 
 ## Launch day
