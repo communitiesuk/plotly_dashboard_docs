@@ -29,6 +29,9 @@ We repeated this test 3 times and the results were always within the same bounds
 ![CPU_general](images/load_test/general/cpu_general_usage2.PNG) <br>
 CPU usage peaked at just under 13% across the duration of the load test.
 
+![Memory utilisation](images/load_test/general/memory_utilisation.png) <br>
+Throughout the load test the memory utilisation was not affected. 
+
 ![response_times_general](images/load_test/general/response_times_(ms)_1651672444.png) <br>
 The median response times stayed consistent at 30ms per request. The 95 percentile was initially high, however it quickly dropped to the range of 40ms - 60ms for the duration of the load test.
 
@@ -41,6 +44,9 @@ We repeated this test 3 times and the results were always within the same bounds
 
 ![CPU_launch](images/load_test/launch/cpu_launch_usage.PNG) <br>
 CPU usage was consistently around 96% for most of the load test, however at some points it exceeded 100% and reached 110%.
+
+![Memory utilisation](images/load_test/launch/memory_utilisation.png) <br>
+With such a high load on the server, there was a slight increase in the amount of memory usage, starting at 7.69%, rising to 7.89%. This is an insignificant increase and should not have any effect on the performance of the dashboard.
 
 ![response_times_launch](images/load_test/launch/response_times_(ms)_1651673914.png) <br>
 The 95 percentile response time averaged at 400ms, however the average median time was around 80ms. There was more fluctuation for the response time with the higher number of users, which is to be expected.
