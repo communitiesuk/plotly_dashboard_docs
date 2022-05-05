@@ -29,10 +29,10 @@ We repeated this test 3 times and the results were always within the same bounds
 ![CPU_general](images/load_test/cpu_general_usage2.PNG) <br>
 CPU usage peaked at just under 13% across the duration of the load test.
 
-![response_times_general](images\load_test\response_times_(ms)_1651672444.png)
+![response_times_general](images\load_test\response_times_(ms)_1651672444.png) <br>
 The median response times stayed consistent at 30ms per request. The 95 percentile was initially high, however it quickly dropped to the range of 40ms - 60ms for the duration of the load test.
 
-![total_requests_per_second_general](images\load_test\total_requests_per_second_1651672444.png)
+![total_requests_per_second_general](images\load_test\total_requests_per_second_1651672444.png) <br>
 There were roughly 28 requests per second, of which none failed.
 
 ## Launch day
@@ -42,10 +42,10 @@ We repeated this test 3 times and the results were always within the same bounds
 ![CPU_launch](images\load_test\launch\cpu_launch_usage.PNG) <br>
 CPU usage was consistently around 96% for most of the load test, however at some points it exceeded 100% and reached 110%.
 
-![response_times_launch](images\load_test\launch\response_times_(ms)_1651673914.png)
+![response_times_launch](images\load_test\launch\response_times_(ms)_1651673914.png) <br>
 The 95 percentile response time averaged at 400ms, however the average median time was around 80ms. There was more fluctuation for the response time with the higher number of users, which is to be expected.
 
-![total_requests_per_second_launch](images\load_test\launch\total_requests_per_second_1651673914.png)
+![total_requests_per_second_launch](images\load_test\launch\total_requests_per_second_1651673914.png) <br>
 There were roughly 200 requests per second, of which none failed.
 
 # Conclusion
