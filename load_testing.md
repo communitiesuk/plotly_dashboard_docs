@@ -59,3 +59,5 @@ Based on our estimated usage of the dashboard, we expect it to be able to handle
 
 Due to the extremely high CPU usage in the launch day scenario it is recommended that we implement auto-scaling within Gov PaaS for this application to prevent the possibility of the dashboard falling over.
 
+# Further Research
+Upon code review, we were alerted to improvements around how we better simulate usage around our load tests, this will be tackled with another user story.
