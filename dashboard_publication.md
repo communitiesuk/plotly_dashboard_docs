@@ -13,8 +13,9 @@
    4. [Accessing a file within the bucket](#accessing-a-file-within-the-bucket)
    5. [Copying a file from one bucket to another bucket](#copying-a-file-from-one-bucket-to-another-bucket)
 5. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
-6. [Key terms](#key-terms)
-7. [References](#references)
+6. [Setting up logging](#setting-up-logging)
+7. [Key terms](#key-terms)
+8. [References](#references)
 
 ## Deploying to Gov UK PaaS
 
@@ -387,6 +388,24 @@ jobs:
     runs-on: ubuntu-20.04
     needs: [product_approval, tech_approval]
 ```
+
+## Setting up logging
+Logging allows us to keep records of logs from our application that would otherwise be difficult to access. This is so that we can be informed as to possible error's being thrown, allowing for easier debugging of these issues. Gov UK PaaS has documentation on how to use Logit, so we will be using Logit in this example.
+
+1. Create an account on [Logit](https://logit.io/)
+2. Follow the "Set up the Logit log management service" [guidance](https://docs.cloud.service.gov.uk/monitoring_apps.html#set-up-the-logit-log-management-service) on Gov UK PaaS.
+3. To create logs from your application, these will need to be created using the in-built python logging package. For example:
+```python
+import logging
+logging.info("test message")
+```
+By default logging is done at warning level, meaning info messages will not be logged. To enable info messages to be logged, the logging package has to be configured:
+```python
+logger = logging.getLogger("root")
+logger.setLevel(logging.INFO)
+logging.basicConfig()
+```
+More information on logging levels can be found [here](https://docs.python.org/3/library/logging.html#logging-levels)
 
 ---
 
