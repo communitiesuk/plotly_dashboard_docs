@@ -407,6 +407,7 @@ logger.setLevel(logging.INFO)
 logging.basicConfig()
 ```
 More information on logging levels can be found [here](https://docs.python.org/3/library/logging.html#logging-levels)
+For Made Tech's approach to logging see [here](https://github.com/madetech/productionisation/blob/master/PRODUCTIONISATION.md#6-application-logging)
 
 ### What to log
 At a minimum you should log all caught exceptions. More information on what is appropriate to log for your application can be found [here.](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) <br>
