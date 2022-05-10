@@ -15,8 +15,9 @@
 5. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
 6. [Setting up logging](#setting-up-logging)
    1. [What to log](#what-to-log)
-7. [Key terms](#key-terms)
-8. [References](#references)
+7. [Setting up application alerts](#setting-up-application-alerts)
+8. [Key terms](#key-terms)
+9. [References](#references)
 
 ## Deploying to Gov UK PaaS
 
@@ -412,6 +413,14 @@ For Made Tech's approach to logging see [here](https://github.com/madetech/produ
 ### What to log
 At a minimum you should log all caught exceptions. More information on what is appropriate to log for your application can be found [here.](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) <br>
 **Do not log sensitive information such as a user's personal information or environment secrets.**
+
+## Setting up application alerts
+Application alerts allow us to be alerted to issues with our application, so issues can be responded to promptly and user experience is maintained. We will be using Sentry in this example.
+
+1. Create an account on [Sentry](https://sentry.io/)
+2. Follow the "Quick start guidance" on Sentry after you have created an account, to: Capture your first error, Invite your team, Track releases, Get smarter alerts <br>
+
+More information on setting up alerts within Sentry can be found [here](https://docs.sentry.io/product/alerts/)
 
 ---
 
