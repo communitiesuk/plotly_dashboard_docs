@@ -391,7 +391,7 @@ jobs:
 ```
 
 ## Setting up logging
-Logging allows us to keep records of logs from our application that would otherwise be difficult to access. This is so that we can be informed as to possible error's being thrown, allowing for easier debugging of these issues. Gov UK PaaS has documentation on how to use Logit, so we will be using Logit in this example.
+Logging allows us to keep records of logs from our application that would otherwise be difficult to access. This is so that we can be informed as to possible error's being thrown, allowing for easier debugging of these issues. Gov UK PaaS has documentation on how to use Logit, so we will be using Logit in this example. As standard Gov UK PaaS uses [Loggregator](https://docs.cloudfoundry.org/loggregator/architecture.html), which deals with logs regarding network traffic and more.
 
 1. Create an account on [Logit](https://logit.io/)
 2. Follow the "Set up the Logit log management service" [guidance](https://docs.cloud.service.gov.uk/monitoring_apps.html#set-up-the-logit-log-management-service) on Gov UK PaaS.
