@@ -14,6 +14,7 @@
    5. [Copying a file from one bucket to another bucket](#copying-a-file-from-one-bucket-to-another-bucket)
 5. [Setting up GitHub manual reviewers for deployment](#setting-up-github-manual-reviewers-for-deployment)
 6. [Setting up logging](#setting-up-logging)
+   1. [What to log](#what-to-log)
 7. [Key terms](#key-terms)
 8. [References](#references)
 
@@ -406,6 +407,10 @@ logger.setLevel(logging.INFO)
 logging.basicConfig()
 ```
 More information on logging levels can be found [here](https://docs.python.org/3/library/logging.html#logging-levels)
+
+### What to log
+At a minimum you should log all caught exceptions. More information on what is appropriate to log for your application can be found [here.](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) <br>
+**Do not log sensitive information such as a user's personal information or environment secrets.**
 
 ---
 
