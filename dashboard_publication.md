@@ -425,7 +425,7 @@ More information on setting up alerts within Sentry can be found [here](https://
 
 ### What if Sentry has downtime?
 
-Due to some recent downtime in Sentry, we have invetsigated what happens to our application if this were to occur. There is no significant effect to our application - no errors are thrown, warnings are logged regarding being unable to establish a connection.
+Due to some recent downtime in Sentry, we have investigated what happens to our application if this were to occur. There is no significant effect to our application - no errors are thrown, warnings are logged regarding being unable to establish a connection.
 
 ---
 
