@@ -16,6 +16,7 @@
 6. [Setting up logging](#setting-up-logging)
    1. [What to log](#what-to-log)
 7. [Setting up application alerts](#setting-up-application-alerts)
+   1. [What if Sentry has downtime?](#what-if-sentry-has-downtime)
 8. [Key terms](#key-terms)
 9. [References](#references)
 
@@ -421,6 +422,10 @@ Application alerts allow us to be alerted to issues with our application, so iss
 2. Follow the "Quick start guidance" on Sentry after you have created an account, to: Capture your first error, Invite your team, Track releases, Get smarter alerts <br>
 
 More information on setting up alerts within Sentry can be found [here](https://docs.sentry.io/product/alerts/)
+
+### What if Sentry has downtime?
+
+Due to some recent downtime in Sentry, we have investigated what happens to our application if this were to occur. There is no significant effect to our application - no errors are thrown, warnings are logged regarding being unable to establish a connection.
 
 ---
 
