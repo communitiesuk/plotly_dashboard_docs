@@ -17,8 +17,9 @@
    1. [What to log](#what-to-log)
 7. [Setting up application alerts](#setting-up-application-alerts)
    1. [What if Sentry has downtime?](#what-if-sentry-has-downtime)
-8. [Key terms](#key-terms)
-9. [References](#references)
+8. [Setting up autoscaling](#setting-up-autoscaling)
+9. [Key terms](#key-terms)
+10. [References](#references)
 
 ## Deploying to Gov UK PaaS
 
@@ -426,6 +427,11 @@ More information on setting up alerts within Sentry can be found [here](https://
 ### What if Sentry has downtime?
 
 Due to some recent downtime in Sentry, we have investigated what happens to our application if this were to occur. There is no significant effect to our application - no errors are thrown, warnings are logged regarding being unable to establish a connection.
+
+## Setting up autoscaling
+Autoscaling is a way of adjusting the number of instances of an application depending on the amount of traffic to that application. It helps prevent the application slowing down in times of high traffic, maintaining a positive user experience. Gov UK PaaS provides guidance on setting up autoscaling for an application.
+
+1. Follow the Gov UK PaaS [guidance](https://docs.cloud.service.gov.uk/managing_apps.html#autoscaling) to set up autoscaling for your application.
 
 ---
 
