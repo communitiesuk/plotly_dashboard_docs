@@ -6,6 +6,9 @@
    1. [Creating the IP filtering application](#creating-the-ip-filtering-application)
    2. [Creating and binding the route service](#creating-and-binding-the-route-service)
 3. [Creating an AWS S3 backing service](#creating-an-aws-s3-backing-service)
+   1. [Creating credentials for the application to the bucket](#creating-credentials-for-the-application-to-the-bucket)
+   2. [Creating credentials to allow for outside access to the bucket](#creating-credentials-to-allow-for-outside-access-to-the-bucket)
+   3. [Refreshing the credentials, which allow for outside access to the bucket](#refreshing-the-credentials-which-allow-for-outside-access-to-the-bucket)
 4. [Accessing a private S3 bucket in Python](#accessing-a-private-s3-bucket-in-python)
    1. [Connecting to s3](#connecting-to-s3)
    2. [Connecting to a bucket](#connecting-to-a-bucket)
@@ -117,7 +120,7 @@ cf create-service aws-s3-bucket default SERVICE_NAME
 ```
 
 --- 
-
+### Creating credentials for the application to the bucket
 Once the service has been created you will need to create credentials for the application to the bucket. 
 This is done by binding the service to the application.
 
@@ -179,7 +182,7 @@ See [Accessing a private S3 bucket in python](#accessing-a-private-s3-bucket-in-
 
 ---
 
-Create credentials to allow for outside access to the bucket
+### Creating credentials to allow for outside access to the bucket
 
 Create a json file, containing:
 ```json 
@@ -202,6 +205,23 @@ cf service-key SERVICE_NAME SERVICE_KEY
 ```
 
 ---
+
+### Refreshing the credentials, which allow for outside access to the bucket
+
+A service key and credentials allow external access to the bucket, these details need to be kept secure to prevent unauthorised access to the bucket. The service key and credentials can be refreshed, to maintain security of the bucket.
+
+1. List all service keys for the service using 
+```bash 
+cf service-keys SERVICE_NAME
+```
+2. Delete the required credentials using
+```bash
+cf delete-service-key SERVICE_INSTANCE SERVICE_KEY
+```
+3. Follow [Creating credentials to allow for outside access to the bucket](#creating-credentials-to-allow-for-outside-access-to-the-bucket)
+
+---
+
 ## Accessing a private S3 bucket in Python
 
 ### Connecting to S3
@@ -333,7 +353,7 @@ response_content = staging_bucket.Object(file).get()["Body"]
 production_bucket.upload_fileobj(response_content, file)
 ```
 
-**Note:** We use the ```.Object(...).get()``` function rather than the ```download_fileobj(...)```, so that we can store the file in a variable, instead of saving it locally. 
+**Note:** We use the ```.Object(...).get()``` function rather than the ```download_fileobj(...)```, so that we can store the file in a variable, instead of saving it locally.
 
 ---
 
