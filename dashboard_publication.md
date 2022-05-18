@@ -3,8 +3,9 @@
 ## Table of contents
 1. [Deploying to Gov UK PaaS](#deploying-to-gov-uk-paas)
 2. [Setting up IP filtering](#setting-up-ip-filtering)
-   1. [Creating the IP filtering application](#creating-the-ip-filtering-application)
-   2. [Creating and binding the route service](#creating-and-binding-the-route-service)
+   1. [Requesting static IP to a web address](#requesting-static-ip-to-a-web-address)
+   2. [Creating the IP filtering application](#creating-the-ip-filtering-application)
+   3. [Creating and binding the route service](#creating-and-binding-the-route-service)
 3. [Creating an AWS S3 backing service](#creating-an-aws-s3-backing-service)
    1. [Creating credentials for the application to the bucket](#creating-credentials-for-the-application-to-the-bucket)
    2. [Creating credentials to allow for outside access to the bucket](#creating-credentials-to-allow-for-outside-access-to-the-bucket)
@@ -79,6 +80,16 @@ If you want to restrict access to certain IP's for secuity purposes, this can be
 Due to how Gov UK PaaS works, it is not possible to enable IP filtering alongside basic authentication.
 It's not possible to set up two routing services on the same hostname meaning only one or the other can be used.
 It is possible however to implement these checks into your application code if required. We will not go through that here.
+
+### Requesting static IP to a web address
+
+As DLUHC work on individual machines, each with their own external IP address, it will be difficult to manage the IP whitelist. As all DLUHC machines should be connected to the internet via Z-scaler, it is possible to present all DLUHC machines under a single IP to a given address. First a Service Now request will need to be made to implement this. An example message you can use is:
+
+_YOU REQUIRE: Static IP routing for {YOUR APPLICATION} URL {YOUR-URL}._
+
+_WHY: So that all requests appear from a single IP address to allow for easy IP whitelisting._
+
+Once this has been completed, you should receive the IP addresses that the traffic will be routed through.
 
 ### Creating the IP filtering application
 
