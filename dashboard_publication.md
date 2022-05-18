@@ -219,6 +219,7 @@ cf service-keys SERVICE_NAME
 cf delete-service-key SERVICE_INSTANCE SERVICE_KEY
 ```
 3. Follow [Creating credentials to allow for outside access to the bucket](#creating-credentials-to-allow-for-outside-access-to-the-bucket)
+**Note:** If these credentials are used as environemnt secrets on GitHub, they will need updating with the new credentials.
 
 ---
 
