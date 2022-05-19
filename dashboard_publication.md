@@ -219,7 +219,7 @@ cf service-key SERVICE_NAME SERVICE_KEY
 
 ### Refreshing the credentials, which allow for outside access to the bucket
 
-A service key and credentials allow external access to the bucket, these details need to be kept secure to prevent unauthorised access to the bucket. The service key and credentials can be refreshed, to maintain security of the bucket.
+A service key and credentials allow external access to the bucket, these details need to be kept secure to prevent unauthorised access to the bucket. The service key and credentials can be refreshed, to maintain security of the bucket. Examples of when you need to refresh the service key and credentials include when a member of the team leaves or if the current credentials are accidentally posted somewhere where they can be viewed by people who shouldn't have them.
 
 1. List all service keys for the service using 
 ```bash 
