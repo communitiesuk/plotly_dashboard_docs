@@ -3,9 +3,13 @@
 ## Table of contents
 1. [Deploying to Gov UK PaaS](#deploying-to-gov-uk-paas)
 2. [Setting up IP filtering](#setting-up-ip-filtering)
-   1. [Creating the IP filtering application](#creating-the-ip-filtering-application)
-   2. [Creating and binding the route service](#creating-and-binding-the-route-service)
+   1. [Requesting static IP to a web address](#requesting-static-ip-to-a-web-address)
+   2. [Creating the IP filtering application](#creating-the-ip-filtering-application)
+   3. [Creating and binding the route service](#creating-and-binding-the-route-service)
 3. [Creating an AWS S3 backing service](#creating-an-aws-s3-backing-service)
+   1. [Creating credentials for the application to the bucket](#creating-credentials-for-the-application-to-the-bucket)
+   2. [Creating credentials to allow for outside access to the bucket](#creating-credentials-to-allow-for-outside-access-to-the-bucket)
+   3. [Refreshing the credentials, which allow for outside access to the bucket](#refreshing-the-credentials-which-allow-for-outside-access-to-the-bucket)
 4. [Accessing a private S3 bucket in Python](#accessing-a-private-s3-bucket-in-python)
    1. [Connecting to s3](#connecting-to-s3)
    2. [Connecting to a bucket](#connecting-to-a-bucket)
@@ -77,6 +81,16 @@ Due to how Gov UK PaaS works, it is not possible to enable IP filtering alongsid
 It's not possible to set up two routing services on the same hostname meaning only one or the other can be used.
 It is possible however to implement these checks into your application code if required. We will not go through that here.
 
+### Requesting static IP to a web address
+
+As DLUHC work on individual machines, each with their own external IP address, it will be difficult to manage the IP whitelist. As all DLUHC machines should be connected to the internet via Z-scaler, it is possible to present all DLUHC machines under a single IP to a given address. First a Service Now request will need to be made to implement this. An example message you can use is:
+
+_YOU REQUIRE: Static IP routing for {YOUR APPLICATION} URL {YOUR-URL}._
+
+_WHY: So that all requests appear from a single IP address to allow for easy IP whitelisting._
+
+Once this has been completed, you should receive the IP addresses that the traffic will be routed through.
+
 ### Creating the IP filtering application
 
 In order to provide IP filtering the following application can be downloaded from github:
@@ -117,7 +131,7 @@ cf create-service aws-s3-bucket default SERVICE_NAME
 ```
 
 --- 
-
+### Creating credentials for the application to the bucket
 Once the service has been created you will need to create credentials for the application to the bucket. 
 This is done by binding the service to the application.
 
@@ -179,7 +193,7 @@ See [Accessing a private S3 bucket in python](#accessing-a-private-s3-bucket-in-
 
 ---
 
-Create credentials to allow for outside access to the bucket
+### Creating credentials to allow for outside access to the bucket
 
 Create a json file, containing:
 ```json 
@@ -202,6 +216,24 @@ cf service-key SERVICE_NAME SERVICE_KEY
 ```
 
 ---
+
+### Refreshing the credentials, which allow for outside access to the bucket
+
+A service key and credentials allow external access to the bucket, these details need to be kept secure to prevent unauthorised access to the bucket. The service key and credentials can be refreshed, to maintain security of the bucket. Examples of when you need to refresh the service key and credentials include when a member of the team leaves or if the current credentials are accidentally posted somewhere where they can be viewed by people who shouldn't have them.
+
+1. List all service keys for the service using 
+```bash 
+cf service-keys SERVICE_NAME
+```
+2. Delete the required credentials using
+```bash
+cf delete-service-key SERVICE_INSTANCE SERVICE_KEY
+```
+3. Follow [Creating credentials to allow for outside access to the bucket](#creating-credentials-to-allow-for-outside-access-to-the-bucket)
+**Note:** If these credentials are used as environemnt secrets on GitHub, they will need updating with the new credentials.
+
+---
+
 ## Accessing a private S3 bucket in Python
 
 ### Connecting to S3
@@ -333,7 +365,7 @@ response_content = staging_bucket.Object(file).get()["Body"]
 production_bucket.upload_fileobj(response_content, file)
 ```
 
-**Note:** We use the ```.Object(...).get()``` function rather than the ```download_fileobj(...)```, so that we can store the file in a variable, instead of saving it locally. 
+**Note:** We use the ```.Object(...).get()``` function rather than the ```download_fileobj(...)```, so that we can store the file in a variable, instead of saving it locally.
 
 ---
 
