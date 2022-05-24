@@ -12,7 +12,7 @@ We performed a Percy visual test on the income dashboard test page. We compared 
 
 We then performed a Percy visual test on an alternative Plotly graph page, created externally to the team. Again, the x-axis, y-axis and title labels were not displayed as expected.
 
-SCREENSHOT
+![percy_snapshot_example](../images/percy-snapshots/percy_snapshot_example.png)
 
 # Conclusion
 
