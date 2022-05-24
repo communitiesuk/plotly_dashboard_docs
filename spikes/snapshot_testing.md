@@ -1,14 +1,23 @@
-# Assumptions
+# Context
 
-We have investigated whether [Percy](https://percy.io/), a snapshot testing tool, works with our local government dashboard. 
+We have investigated whether [Percy](https://percy.io/), an automated visual testing tool, works with our local government dashboard. The dash testing package provides this functionality through the use of dash-duo.
 
-Snapshot testing tools ensure data changes are not introducing any regressions, so we can catch regression errors in our dashboard before users see them. Our dashboard mostly displays data in graphs/charts, which are produced in Plotly using SVG’s. Snapshot testing tools take snapshots of the screen, before and after a change, allowing us to identify and resolve any regressions. 
+```python
+from index import app
 
-An income dashboard test was created with enough data to generate a bar chart on the page. A Percy visual test was added to the income dashboard page.
+def test(dash_duo):
+    dash_duo.start_server(app, 8085)
+    # ... load the page to take a snapshot of
+    dash_duo.percy_snapshot("test_snapshot_01")
+```
+
+Visual testing tools ensure the presentation of the page is consistent when updates are being made. A baseline image can be set, which can be used to compare future images to - any changes are then highlighted in red within the Percy user interface. These changes can then be reviewed, and if deemed appropriate a new baseline image can be set for future screenshots to be compared against. Otherwise, the difference is a highlighted regression, which can be addressed quicker. Our dashboard mostly displays data in graphs/charts, which are produced in Plotly using SVG’s.
+
+A test was performed on the income dashboard page, which included taking Percy snapshots to investigate how we use this tool.
 
 # Findings
 
-We performed a Percy visual test on the income dashboard test page. We compared a baseline screenshot to a screenshot taken after data changes, the data changes were highlighted in red. However, the screenshots produced by Percy did not display the x-axis, y-axis and title labels where expected.
+We performed a Percy visual test on the income dashboard page. We first created a baseline image ****** We compared a baseline screenshot to a screenshot taken after data changes, the data changes were highlighted in red. However, the screenshots produced by Percy did not display the x-axis, y-axis and title labels where expected.
 
 We then performed a Percy visual test on an alternative Plotly graph page, created externally to the team. Again, the x-axis, y-axis and title labels were not displayed as expected.
 
@@ -16,7 +25,7 @@ We then performed a Percy visual test on an alternative Plotly graph page, creat
 
 # Conclusion
 
-Based on our attempts to use Percy as a snapshot testing tool with Plotly dashboards, we do not recommend the use of Percy. 
+Based on our attempts to use Percy as a visual testing tool with Plotly dashboards, we do not recommend the use of Percy. 
 
 # Further research 
 
