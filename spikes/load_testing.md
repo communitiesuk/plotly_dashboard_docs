@@ -54,3 +54,5 @@ Based on our estimated usage of the dashboard, we expect it to be able to handle
 
 # Further Research
 Upon code review, we were alerted to possible issues with using DOM element id's as part of our load test, which will cause the load test to fail if we change them and do not update the load test. We have created spike tickets to investigate how we can make the load test less prone to breaking when changes are made to the dashboard code. 
+
+Furthermore, a ticket has been created to improve the performance of the 'Compare local authorities' page, as when running the load test we identified that the dashboard begins to struggle with a small number of simultaneous users.
