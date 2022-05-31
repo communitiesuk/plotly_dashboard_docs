@@ -8,6 +8,8 @@ The load test will simulate XHR/Fetch requests on page updates - the application
 
 Prometheus will be used to gather the CPU Usage and Memory utilisation; the Locust user interface will provide response time and failed user request metrics.
 
+Note: The dashboard has autoscaling configured, with a maximum of 2 instances.
+
 We will break our estimate down into 2 scenarios - General usage and Launch day (expecting a higher usage on launch) and run each scenario load test for 15 minutes.
 
 ## Viewing XHR requests on a webpage
@@ -32,26 +34,23 @@ We estimate the number of users on launch day to be 10 times that of our general
 We ran a load test where we spawned 1 user per second up to a maximum of 46 users, we ran this test for 15 minutes.
 We repeated this test twice and the results were always within the same bounds. 
 
-
 ![CPU_general](/images/load_test/xhr-general/cpu.PNG) <br>
-*CPU usage peaked at just under 13% across the duration of the load test.
+CPU usage was roughly 100% across the duration of the load test with 2 instances.
 
 ![Memory utilisation](/images/load_test/xhr-general/memory_utilisation.PNG) <br>
-*Throughout the load test the memory utilisation was not affected. 
+Throughout the load test the memory utilisation was not affected, except when a second instance was spun up and spun down. 
 
 ![response_times_general](/images/load_test/xhr-general/response_times.PNG) <br>
-*The median response times stayed consistent at 30ms per request. The 95 percentile was initially high, however it quickly dropped to the range of 40ms - 60ms for the duration of the load test.
+There was variation in the median response times, initially 70,000 ms per request, but dropping to a range of 15,000 - 40,000 ms. The 95 percentile followed the trends of the median response times.
 
 ![total_requests_per_second_general](/images/load_test/xhr-general/total_requests.PNG) <br>
-*There were roughly 28 requests per second, of which none failed.
+There were roughly 4 requests per second, of which none failed.
 
 ## Launch day
-We did not run a launch day load test ....
+We did not run a launch day load test due to the already high CPU usage of roughly 100% across the 2 instances for the general load test. 
 
 # Conclusion
-Based on our estimated usage of the dashboard, we expect it to be able to handle loads of up to 460 users at one time. However, at higher usage we can expect poorer performance, though this should not be longer than 1 second, which we believe to be within a reasonable range. [See this article on response times](https://www.nngroup.com/articles/response-times-3-important-limits/).
-
-Due to the extremely high CPU usage in the launch day scenario it is recommended that we implement auto-scaling within Gov PaaS for this application to prevent the possibility of the dashboard falling over.
+Based on our estimated usage of the dashboard, we expect it to be able to handle loads of up to 46 users at one time. However, at higher usage we can expect poorer performance, so further research needs to be carried out, to determine possible changes to allow the dashboard to support a larger number of users, such as our estimate of 460 users for our launch day.
 
 # Further Research
-Upon code review, we were alerted to improvements around how we better simulate usage around our load tests, this will be tackled with another user story.
+Upon code review, we were alerted to possible issues with using DOM element id's as part of our load test, which will cause the load test to fail if we change them and do not update the load test. We have created spike tickets to investigate how we can make the load test less prone to breaking when changes are made to the dashboard code. 
