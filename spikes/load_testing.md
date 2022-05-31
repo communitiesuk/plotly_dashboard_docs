@@ -2,11 +2,11 @@
 
 We have used a chrome plug-in, SimilarWeb to investigate other sites which could have a similar audience as our dashboards - LG Inform and LGC plus. These sites seem to average in the range of 50k users a month.
 
-The load test will initially focus on user routes through the dashboard, instead of simply requesting each page individually then moving onto the next test. The benefit of this approach is we can mimic a user making choices in the available dropdowns on each of the pages.
+The load test will focus on the 'Compare local authorities' page, as this is the page of interest for launch. The load test will focus on user routes through the dashboard, the benefit of this approach is we can mimic a user making choices in the available dropdowns on the 'Compare local authorities' page.
 
-The first iteration of load testing will not use a web framework such as Cypress or Selenium WebDriver to control changes to the dropdowns on each of the pages. Instead, the locust tests will issue new page requests with query strings values matching the desired options in the dropdowns. This will slightly skew the results as instead of an asynchronous XHR request being executed within the page, we are requesting a new page load. This means we may be slightly over estimating the number of requests we are capable of recieveing. 
+The load test will simulate XHR/Fetch requests on page updates - the application updates part of a page without performing a full page refresh. So when an element on a page of the dashboard is updated, an XHR request is made to perform the update. 
 
-Prometheus will be used to gather the CPU Usage, Memory utilisation; the Locust user interface will provide response time and failed user request metrics
+Prometheus will be used to gather the CPU Usage and Memory utilisation; the Locust user interface will provide response time and failed user request metrics.
 
 We will break our estimate down into 2 scenarios - General usage and Launch day (expecting a higher usage on launch) and run each scenario load test for 15 minutes.
 
