@@ -10,6 +10,13 @@ Prometheus will be used to gather the CPU Usage and Memory utilisation; the Locu
 
 We will break our estimate down into 2 scenarios - General usage and Launch day (expecting a higher usage on launch) and run each scenario load test for 15 minutes.
 
+## Viewing XHR requests on a webpage
+XHR requests that a dashboard page performs when a filter is changed can be found by:
+1. Loading the dashboard in chrome
+2. Right clicking and selecting inspect and then selecting network
+3. Making a change on the dashboard page in chrome
+4. Selecting request payload
+
 ## General usage estimate: 
 500000 monthly users / 30 days average in a month = 1667 daily users <br>
 Assuming users are active for 12 hours a day, taking into consideration lower usage during the evening and night: 1667 daily users / 12 = 139 users per active hour <br>
