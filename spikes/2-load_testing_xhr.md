@@ -41,12 +41,29 @@ There was variation in the median response times, initially 70,000 ms per reques
 There were roughly 4 requests per second, of which none failed.
 
 ## Launch day
-We did not run a launch day load test due to the already high CPU usage of roughly 100% across the 2 instances for the general load test. 
+We ran a load test where we spawned 1 user per second up to a maximum of 460 users, we planned to run the test for 15 minutes, however we had to cut the test short due to us hitting the limit on what our dashboard could handle. 
+
+![response_times_launch](/images/load_test/xhr-launch/response_times_(ms)_1654077163.png) <br>
+The response time plateaued at 1 minute, and started returning 400 (bad request) errors.
+
+![total_requests_per_second_launch](/images/load_test/xhr-launch/total_requests_per_second_1654077163.png) <br>
+Once there were 295 users, response times were greater than 1 minute, which led to request failures.
+
 
 # Conclusion
-Based on our estimated usage of the dashboard, the dashboard does not fall over durin high load, however response times far exceed what would be acceptable for a good user experience, as the response time is 15,000 - 40,000 ms. At higher usage of the dashboard, such as our estimate of 460 users for launch day, we can expect poorer performance of the dashboard and larger request times, so further research needs to be carried out, to determine possible changes to allow the dashboard to support a larger number of users.
+Based on our estimated usage of the dashboard, the dashboard does not fall over during high load, however response times far exceed what would be acceptable for a good user experience, as the response time is 15,000 - 40,000 ms. At higher usage of the dashboard, such as our estimate of 460 users for launch day, we can expect poorer performance of the dashboard and longer response times up to 1 minute, where requests start to fail. Further research needs to be carried out, to determine possible changes to allow the dashboard to support a larger number of users.
 
 # Further Research
-Upon code review, we were alerted to possible issues with using DOM element id's as part of our load test, which will cause the load test to fail if we change them and do not update the load test. We have created spike tickets to investigate how we can make the load test less prone to breaking when changes are made to the dashboard code. 
+A ticket has been created to improve the performance of the 'Compare local authorities' page, as when running the load test we identified that the dashboard begins to struggle with a small number of simultaneous users. 
 
-Furthermore, a ticket has been created to improve the performance of the 'Compare local authorities' page, as when running the load test we identified that the dashboard begins to struggle with a small number of simultaneous users.
+Identifying potential bottlenecks:
+ - Profiling python code - Could indicate as to why our dashboard updates are slow.
+
+Possible short term improvements:
+ - Increase memory on application - compute power and memory are linked within Gov UK PaaS. More memory = More CPU. This would incur a cost.
+ - Increase the max number of instances - A lot of instances would be needed. This would incur a cost.
+
+Possible code improvements:
+ - Rewriting the callbacks for the filters. Is it possible to not have to load the entire jitter every time an authority is selected? Can we update the single point?
+ - Clientside callbacks - this uses javascript.
+ - Pre-processing of slow running processes.
