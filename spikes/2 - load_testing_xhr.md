@@ -50,7 +50,8 @@ There were roughly 4 requests per second, of which none failed.
 We did not run a launch day load test due to the already high CPU usage of roughly 100% across the 2 instances for the general load test. 
 
 # Conclusion
-Based on our estimated usage of the dashboard, we expect it to be able to handle loads of up to 46 users at one time. However, at higher usage we can expect poorer performance, so further research needs to be carried out, to determine possible changes to allow the dashboard to support a larger number of users, such as our estimate of 460 users for our launch day.
+Based on our estimated usage of the dashboard, we do not expect the dashboard to be able to handle 46 users at one time as the response time of 15,000 - 40,000 ms will result in a poor user experience.
+At higher usage of the dashboard, such as our estimate of 460 users for launch day, we can expect poorer performance of the dashboard and larger request times, so further research needs to be carried out, to determine possible changes to allow the dashboard to support a larger number of users.
 
 # Further Research
 Upon code review, we were alerted to possible issues with using DOM element id's as part of our load test, which will cause the load test to fail if we change them and do not update the load test. We have created spike tickets to investigate how we can make the load test less prone to breaking when changes are made to the dashboard code. 
