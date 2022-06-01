@@ -15,8 +15,9 @@ We will break our estimate down into 2 scenarios - General usage and Launch day 
 ## Viewing XHR requests on a webpage
 XHR requests that a dashboard page performs when a filter is changed can be found by:
 1. Loading the dashboard in chrome
-2. Right clicking and selecting inspect and then selecting network
+2. Pressing F12 
 3. Making a change on the dashboard page in chrome
+4. Selecting an updated component 
 4. Selecting request payload
 
 ## General usage estimate: 
