@@ -14,14 +14,15 @@ The load test will use the same estimates as the previous load test.
 Note: The dashboard has autoscaling configured, with a maximum of 2 instances.
 
 ## Testing method
-These tests were modelled on the requests shown within the chrome developer tools as we ran through a user journey on the 'Compare local authorities' page.
+These tests were modelled on the requests shown within the Chrome developer tools as we ran through a user journey on the 'Compare local authorities' page.
 
 XHR/Fetch requests can be found by:
 1. Loading the dashboard in chrome
-2. Pressing F12 
-3. Making a change on the dashboard page in chrome
-4. Selecting an updated component 
-5. Selecting request payload
+2. Pressing F12
+3. Selecting the network tab
+4. Making a change on the dashboard page in chrome
+5. Selecting an updated component 
+6. Selecting request payload
 
 # Findings
 ## General usage
