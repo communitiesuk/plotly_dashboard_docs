@@ -11,7 +11,7 @@ Prometheus will be used to gather the CPU Usage, Memory utilisation; the Locust 
 We will break our estimate down into 2 scenarios - General usage and Launch day (expecting a higher usage on launch) and run each scenario load test for 15 minutes.
 
 ## General usage estimate: 
-500000 monthly users / 30 days average in a month = 1667 daily users <br>
+50,000 monthly users / 30 days average in a month = 1667 daily users <br>
 Assuming users are active for 12 hours a day, taking into consideration lower usage during the evening and night: 1667 daily users / 12 = 139 users per active hour <br>
 Breaking that down into a 20-minute window equates to around 46 users.
 
@@ -26,32 +26,32 @@ We ran a load test where we spawned 1 user per second up to a maximum of 46 user
 We repeated this test 3 times and the results were always within the same bounds. 
 
 
-![CPU_general](images/load_test/general/cpu_general_usage2.PNG) <br>
+![CPU_general](/images/load_test/general/cpu_general_usage2.PNG) <br>
 CPU usage peaked at just under 13% across the duration of the load test.
 
-![Memory utilisation](images/load_test/general/memory_utilisation.png) <br>
+![Memory utilisation](/images/load_test/general/memory_utilisation.png) <br>
 Throughout the load test the memory utilisation was not affected. 
 
-![response_times_general](images/load_test/general/response_times_(ms)_1651672444.png) <br>
+![response_times_general](/images/load_test/general/response_times_(ms)_1651672444.png) <br>
 The median response times stayed consistent at 30ms per request. The 95 percentile was initially high, however it quickly dropped to the range of 40ms - 60ms for the duration of the load test.
 
-![total_requests_per_second_general](images/load_test/general/total_requests_per_second_1651672444.png) <br>
+![total_requests_per_second_general](/images/load_test/general/total_requests_per_second_1651672444.png) <br>
 There were roughly 28 requests per second, of which none failed.
 
 ## Launch day
 We ran a load test where we spawned 10 users per second up to a maximum of 460 users, we ran this test for 15 minutes.
 We repeated this test 3 times and the results were always within the same bounds. 
 
-![CPU_launch](images/load_test/launch/cpu_launch_usage.PNG) <br>
+![CPU_launch](/images/load_test/launch/cpu_launch_usage.PNG) <br>
 CPU usage was consistently around 96% for most of the load test, however at some points it exceeded 100% and reached 110%.
 
-![Memory utilisation](images/load_test/launch/memory_utilisation.png) <br>
+![Memory utilisation](/images/load_test/launch/memory_utilisation.png) <br>
 With such a high load on the server, there was a slight increase in the amount of memory usage, starting at 7.69%, rising to 7.89%. This is an insignificant increase and should not have any effect on the performance of the dashboard.
 
-![response_times_launch](images/load_test/launch/response_times_(ms)_1651673914.png) <br>
+![response_times_launch](/images/load_test/launch/response_times_(ms)_1651673914.png) <br>
 The 95 percentile response time averaged at 400ms, however the average median time was around 80ms. There was more fluctuation for the response time with the higher number of users, which is to be expected.
 
-![total_requests_per_second_launch](images/load_test/launch/total_requests_per_second_1651673914.png) <br>
+![total_requests_per_second_launch](/images/load_test/launch/total_requests_per_second_1651673914.png) <br>
 There were roughly 200 requests per second, of which none failed.
 
 # Conclusion
