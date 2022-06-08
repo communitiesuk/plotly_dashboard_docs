@@ -21,9 +21,10 @@
    1. [What to log](#what-to-log)
 7. [Setting up application alerts](#setting-up-application-alerts)
    1. [What if Sentry has downtime?](#what-if-sentry-has-downtime)
-8. [Setting up autoscaling](#setting-up-autoscaling)
-9. [Key terms](#key-terms)
-10. [References](#references)
+8. [Setting up monitoring](#setting-up-monitoring)
+9. [Setting up autoscaling](#setting-up-autoscaling)
+10. [Key terms](#key-terms)
+11. [References](#references)
 
 ## Deploying to Gov UK PaaS
 
@@ -459,6 +460,12 @@ More information on setting up alerts within Sentry can be found [here](https://
 ### What if Sentry has downtime?
 
 Due to some recent downtime in Sentry, we have investigated what happens to our application if this were to occur. There is no significant effect to our application - no errors are thrown, warnings are logged regarding being unable to establish a connection.
+
+## Setting up monitoring
+Monitoring allows us to gather information about how our dashboard is performing by providing time series data for metrics including CPU, number of crashes, request and response times. By keeping a copy of these metrics this will allow us to interrogate historic data, allowing us to ensure users can access our dashboard as expected.
+
+1. Follow the [guidance](https://github.com/communitiesuk/dluhc-data-collection-monitoring) created by Stephane from Made Tech.
+2. Follow the Grafana [guidance](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/) to get started with Grafana and Prometheus.
 
 ## Setting up autoscaling
 Autoscaling is a way of adjusting the number of instances of an application depending on the amount of traffic to that application. It helps prevent the application slowing down in times of high traffic, maintaining a positive user experience. Gov UK PaaS provides guidance on setting up autoscaling for an application.
