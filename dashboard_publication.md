@@ -465,7 +465,7 @@ Due to some recent downtime in Sentry, we have investigated what happens to our 
 Monitoring allows us to gather information about how our dashboard is performing by providing time series data for metrics including CPU, number of crashes, request and response times. By keeping a copy of these metrics this will allow us to interrogate historic data, allowing us to ensure users can access our dashboard as expected.
 
 1. Follow the [guidance](https://github.com/communitiesuk/dluhc-data-collection-monitoring) created by Stephane from Made Tech.
-2. Follow the Grafana [guidance](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/) to get started with Grafana and Prometheus.
+2. Follow the Grafana [guidance](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/) to get started with both Grafana and Prometheus and to create a dashboard to visualise the metrics.
 
 ## Setting up autoscaling
 Autoscaling is a way of adjusting the number of instances of an application depending on the amount of traffic to that application. It helps prevent the application slowing down in times of high traffic, maintaining a positive user experience. Gov UK PaaS provides guidance on setting up autoscaling for an application.
