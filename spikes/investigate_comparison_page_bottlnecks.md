@@ -23,7 +23,7 @@ Based on our findings, we identified four possible solutions:
 - We are not specifying a number of workers in our current gunicorn deployment, so a default of 1 is being applied. Gunicorn recommends the formula **(2 x $num_cores) + 1** to be used when calculating the number of workers. We will run load tests whilst using 1, 2 and 3 workers and determine which performs best.
 
 3. **[Investigate updating LA jitter points rather than re-generating jitter charts when LA's are selected:](https://trello.com/c/VJAIYcsF/682-spike-investigate-updating-la-jitter-points-rather-than-re-generating-jitter-charts-when-las-are-selected)** 
-- Investigate if it is possible to only update selected local authority points on jitter charts, instead of regenerating all the jitter charts each type an LA is selected.
+- Investigate if it is possible to only update selected local authority points on jitter charts, instead of regenerating all the jitter charts each time an LA is selected.
 
 4. **Plotly client side performance improvements:**
 - Update callbacks to be [clientside callbacks](https://dash.plotly.com/clientside-callbacks) so that functions are ran on the client's machines rather than the server.
