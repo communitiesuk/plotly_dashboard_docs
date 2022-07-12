@@ -60,7 +60,7 @@ git config --global user.email "Your.Name@levellingup.gov.uk"
     **Note:** Terminal can only handle one command at a time, if the python server is running the terminal will not handle any further commands. To restart the server use `python run.py`
 
 ### Setting environment variables
-1. From VS Code, open the `.env` file. If this file does not exist, then create it at the root of the project. 
+1. From VS Code, open the `.env` file. If this file does not exist, then create it at the root of the project. This project is excluded from git commits, so can contain secrets such as AWS Access keys as they will only be present on an individual developer laptop
 1. Inside the `.env file`, add the new environment variable in the format `ENVIRONMENT_VARIABLE=VALUE`. An example is `STAGE="production"`. There is a file called `.env.example` that be used for reference
 
 ## Development
